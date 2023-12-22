@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
+import CoursesPage from './pages/Courses.jsx'
+import Assignment from './pages/Assignment.jsx'
 
 import {
   createBrowserRouter,
@@ -12,6 +14,14 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/cor",
+    element: <CoursesPage />,
+  },
+  {
+    path: "/assignment",
+    element: <Assignment />,
   },
 
 ]);
