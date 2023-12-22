@@ -51,21 +51,21 @@ const CourseCreationPage = () => {
     };
 
     const CourseGrid = ({ courses }) => (
-        <div>
-          <h1>Available Courses</h1>
-          <Row>
-            {courses.map((course) => (
-              <Col key={course.id} md={4}>
-                <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
-                  <h3>{course.name}</h3>
-                  <p><strong>Subject:</strong> {course.subject}</p>
-                  <p><strong>Grade Level:</strong> {course.gradeLevel}</p>
-                  <p><strong>Description:</strong> {course.description}</p>
-                </div>
-              </Col>
-            ))}
-          </Row>
-        </div>
+        <div className="my-4 py-4 text-center">
+        <h1 className="text-primary">Your Courses</h1>
+        <Row className="justify-content-center">
+          {courses.map((course) => (
+            <Col key={course.id} md={4}>
+              <div className="border rounded p-4 mb-4 shadow-sm">
+                <h3 className="text-info">{course.name}</h3>
+                <p><strong>Subject:</strong> {course.subject}</p>
+                <p><strong>Grade Level:</strong> {course.gradeLevel}</p>
+                <p><strong>Description:</strong> {course.description}</p>
+              </div>
+            </Col>
+          ))}
+        </Row>
+      </div>
     );
       
 
@@ -98,71 +98,76 @@ const CourseCreationPage = () => {
 
     return (
         <>
-            <Container>
-                <Row>
-                    <Col md={{ span: 6, offset: 3 }}>
-                        <h1>Create a Course</h1>
-                        <Form onSubmit={handleSubmit}>
-                            <Form.Group controlId="subject">
-                                <Form.Label>Subject</Form.Label>
-                                <Form.Control
-                                    as="select"
-                                    name="subject"
-                                    value={formData.subject}
-                                    onChange={handleChange}
-                                    readOnly
-                                >
-                                    <option value="">Select Subject</option>
-                                    <option value="Mathematics">Mathematics</option>
-                                    <option value="Computer Science">Computer Science</option>
-                                    <option value="Business">Business</option>
-                                    <option value="Arts">Arts</option>
-                                </Form.Control>
-                            </Form.Group>
-                            <Form.Group controlId="name">
-                                <Form.Label>Course Name</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </Form.Group>
-                            <Form.Group controlId="gradeLevel" />
-                            <Form.Label>Grade Level</Form.Label>
-                            <Form.Control
-                                as="select"
-                                name="gradeLevel"
-                                value={formData.gradeLevel}
-                                onChange={handleChange}
-                                required
-                            >
-                                <option value="">Select Grade Level</option>
-                                <option value="High School">High School</option>
-                                <option value="Elementary School">Elementary School</option>
-                                {/* Add more grade levels as needed */}
-                            </Form.Control>
-                            <Form.Group controlId="description">
-                                <Form.Label>Description</Form.Label>
-                                <Form.Control
-                                    as="textarea"
-                                    rows={3}
-                                    name="description"
-                                    value={formData.description}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </Form.Group>
-                            <Button variant="primary" type="submit">
-                                Create Course
-                            </Button>
-                        </Form>
-                    </Col>
-                </Row>
-            </Container>
-            <CourseGrid courses={courses} />
-        </>
+      <Container className="my-4 py-4">
+        <Row>
+          <Col md={{ span: 6, offset: 3 }} className="text-center">
+            <h1 className="text-primary">Create a Course</h1>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="subject">
+                <Form.Label>Subject</Form.Label>
+                <Form.Control
+                  as="select"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  readOnly
+                  className="mb-3"
+                >
+                  <option value="">Select Subject</option>
+                  <option value="Mathematics">Mathematics</option>
+                  <option value="Computer Science">Computer Science</option>
+                  <option value="Business">Business</option>
+                  <option value="Arts">Arts</option>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group controlId="name">
+                <Form.Label>Course Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="mb-3"
+                />
+              </Form.Group>
+              <Form.Group controlId="gradeLevel">
+                <Form.Label>Grade Level</Form.Label>
+                <Form.Control
+                  as="select"
+                  name="gradeLevel"
+                  value={formData.gradeLevel}
+                  onChange={handleChange}
+                  required
+                  className="mb-3"
+                >
+                  <option value="">Select Grade Level</option>
+                  <option value="High School">High School</option>
+                  <option value="Elementary School">Elementary School</option>
+                  {/* Add more grade levels as needed */}
+                </Form.Control>
+              </Form.Group>
+              <Form.Group controlId="description">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  required
+                  className="mb-3"
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit" className="mb-3">
+                Create Course
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+      <CourseGrid courses={courses} />
+    </>
 
     );
 };
