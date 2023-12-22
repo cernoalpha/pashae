@@ -6,6 +6,7 @@ import CoursesPage from './pages/Courses.jsx'
 import Assignment from './pages/Assignment.jsx'
 import TeacherDashboard from './pages/TeacherDash.jsx'
 import AssignmentSettings from './pages/TeacherAssignment.jsx'
+import CourseCreationPage from "./pages/AddCourse.jsx"
 import {store} from './store.js';
 import { Provider } from 'react-redux';
 
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/teca",
     element: <AssignmentSettings />,
+  },
+  {
+    path: "/cc",
+    element: <CourseCreationPage />,
   },
 
 ]);
