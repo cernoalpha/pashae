@@ -1,19 +1,15 @@
-// TeacherDashboard.js
 import React, { useState } from "react";
 import {
-    Grid,
-    Paper,
-    Typography,
-    Avatar,
-    List,
-    ListItem,
-    ListItemText,
-    Button,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-  } from '@mui/material';
+  Container,
+  Row,
+  Col,
+  Button,
+  Modal,
+  Form,
+  ListGroup,
+  Card,
+  FormControl,
+} from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -86,6 +82,7 @@ const TeacherDashboard = () => {
     // Log the information of a particular class to the console
     console.log("Class Information:", createdClasses[index]);
   };
+
   const [openProfileModal, setOpenProfileModal] = useState(false);
 
   const handleOpenProfileModal = () => {
@@ -98,147 +95,144 @@ const TeacherDashboard = () => {
 
   return (
     <>
-    <Grid container spacing={2}>
-      {/* Profile Button (Top Right Corner) */}
-      <Grid item xs={12} sx={{ textAlign: 'right', marginTop: 2, marginRight: 2 }}>
-        <Button variant="outlined" onClick={handleOpenProfileModal}>
-          View Profile
-        </Button>
-      </Grid>
+      <Container>
+        {/* Profile Button (Top Right Corner) */}
+        <Row className="justify-content-end mt-2">
+          <Button variant="outline-primary" onClick={handleOpenProfileModal}>
+            View Profile
+          </Button>
+        </Row>
 
-      {/* Teacher's Profile Modal */}
-      <Dialog open={openProfileModal} onClose={handleCloseProfileModal}>
-        <DialogTitle>Teacher's Profile</DialogTitle>
-        <DialogContent sx={{ textAlign: 'center' }}>
-          <Avatar src="teacher-profile-picture.jpg" alt="Teacher" sx={{ width: 100, height: 100, margin: 'auto' }} />
-          <Typography variant="h5" sx={{ fontWeight: 'bold', marginTop: 2 }}>
-            John Doe
-          </Typography>
-          <Typography variant="body1">Email ID: john.doe@example.com</Typography>
-          <Typography variant="body2">Courses Taken:</Typography>
-          <List>
-            <ListItem>
-              <ListItemText primary="Course 1" />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Course 2" />
-            </ListItem>
-            {/* Add more courses as needed */}
-          </List>
-          <Typography variant="body2" sx={{ marginTop: 2 }}>
-            <Button color="primary">Change Password</Button>
-            <Button color="primary" sx={{ marginLeft: 2 }}>
-              Sign Out
-            </Button>
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseProfileModal}>Close</Button>
-        </DialogActions>
-      </Dialog>
-    </Grid>
-    <div className="container mt-3">
-      <button className="btn btn-primary mb-3" onClick={handleCreateClass}>
-        Create New Class
-      </button>
-
-      {showCalendar && (
-        <div className="card mb-3">
-          <div className="card-body">
-            <h2 className="card-title">Select a Date</h2>
-            <DatePicker
-              selected={selectedDate}
-              onChange={handleDateSelect}
-              className="form-control mb-3"
+        {/* Teacher's Profile Modal */}
+        <Modal show={openProfileModal} onHide={handleCloseProfileModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Teacher's Profile</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="text-center">
+            <img
+              src="teacher-profile-picture.jpg"
+              alt="Teacher"
+              className="img-fluid rounded-circle"
+              style={{ width: "100px", height: "100px", margin: "auto" }}
             />
-
-            {/* New Class Form */}
-            <form>
-              <div className="mb-3">
-                <label className="form-label">Time:</label>
-                <input
-                  type="time"
-                  style={{ width: "200px" }}
-                  name="time"
-                  value={newClass.time}
-                  onChange={handleInputChange}
-                  className="form-control"
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Subject:</label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={newClass.subject}
-                  onChange={handleInputChange}
-                  className="form-control"
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Description:</label>
-                <textarea
-                  name="description"
-                  value={newClass.description}
-                  onChange={handleInputChange}
-                  className="form-control"
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">Google Meet Link:</label>
-                <input
-                  type="text"
-                  name="meetLink"
-                  value={newClass.meetLink}
-                  onChange={handleInputChange}
-                  className="form-control"
-                />
-              </div>
-
-              <button
-                type="button"
-                onClick={handleSaveClass}
-                className="btn btn-success"
-              >
-                Save Class
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Display created classes */}
-      <div className="row">
-        {createdClasses.map((cls, index) => (
-          <div key={index} className="col-md-4 mb-3">
-            <div
-              className="card"
-              onClick={() => handleClassClick(index)}
-              style={{ cursor: "pointer" }}
-            >
-              <div className="card-body">
-                <h5 className="card-title">{cls.subject}</h5>
-                <p className="card-text">{cls.description}</p>
-                <p className="card-text">
-                  {cls.date} - {cls.time}
-                </p>
-                <a
-                  href={cls.meetLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary"
-                >
-                  Join Class
-                </a>
-              </div>
+            <h5 className="font-weight-bold mt-2">John Doe</h5>
+            <p>Email ID: john.doe@example.com</p>
+            <p>Courses Taken:</p>
+            <ListGroup>
+              <ListGroup.Item>Course 1</ListGroup.Item>
+              <ListGroup.Item>Course 2</ListGroup.Item>
+              {/* Add more courses as needed */}
+            </ListGroup>
+            <div className="mt-2">
+              <Button variant="primary" className="mr-2">
+                Change Password
+              </Button>
+              <Button variant="primary">Sign Out</Button>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={handleCloseProfileModal}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </Container>
+      <Container className="mt-3">
+        <Button variant="primary" className="mb-3" onClick={handleCreateClass}>
+          Create New Class
+        </Button>
+
+        {showCalendar && (
+          <Card className="mb-3">
+            <Card.Body>
+              <Card.Title>Select a Date</Card.Title>
+              <DatePicker
+                selected={selectedDate}
+                onChange={handleDateSelect}
+                className="form-control mb-3"
+              />
+
+              {/* New Class Form */}
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Label>Time:</Form.Label>
+                  <FormControl
+                    type="time"
+                    style={{ width: "200px" }}
+                    name="time"
+                    value={newClass.time}
+                    onChange={handleInputChange}
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Subject:</Form.Label>
+                  <FormControl
+                    type="text"
+                    name="subject"
+                    value={newClass.subject}
+                    onChange={handleInputChange}
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Description:</Form.Label>
+                  <FormControl
+                    as="textarea"
+                    name="description"
+                    value={newClass.description}
+                    onChange={handleInputChange}
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Google Meet Link:</Form.Label>
+                  <FormControl
+                    type="text"
+                    name="meetLink"
+                    value={newClass.meetLink}
+                    onChange={handleInputChange}
+                  />
+                </Form.Group>
+
+                <Button
+                  type="button"
+                  onClick={handleSaveClass}
+                  variant="success"
+                >
+                  Save Class
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        )}
+
+        {/* Display created classes */}
+        <Row>
+          {createdClasses.map((cls, index) => (
+            <Col key={index} md={4} className="mb-3">
+              <Card
+                onClick={() => handleClassClick(index)}
+                style={{ cursor: "pointer" }}
+              >
+                <Card.Body>
+                  <Card.Title>{cls.subject}</Card.Title>
+                  <Card.Text>{cls.description}</Card.Text>
+                  <Card.Text>
+                    {cls.date} - {cls.time}
+                  </Card.Text>
+                  <a
+                    href={cls.meetLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                  >
+                    Join Class
+                  </a>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
     </>
   );
 };
