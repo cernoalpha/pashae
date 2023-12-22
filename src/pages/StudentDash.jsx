@@ -20,6 +20,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
+import { color } from "@mui/system";
+import { blue } from "@mui/material/colors";
+import { auto } from "@popperjs/core";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -100,26 +103,27 @@ const Dashboard = () => {
       <Row>
         <Col xs={12}>
          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-           <a class="navbar-brand" href="#">Logo</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-             <span class="navbar-toggler-icon"></span>
+           <a class="navbar-brand" href="#">App Name</a>
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                 Dropdown
-                 </a>
-                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-         </nav>
+             <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav "> 
+                  <li class="nav-item dropdown ml-auto">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img src="image refeence" style={{marginLeft: "auto"}}></img>
+                    </a>
+                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                     <a class="dropdown-item" href="#">Action</a>
+                     <a class="dropdown-item" href="#">Another action</a>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                 </li>
+                </ul>
+             </div>
+          </nav>
+
           {/* <Navbar bg="light" expand="lg">
             <Navbar.Brand>Welcome back, John!</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -142,9 +146,9 @@ const Dashboard = () => {
       </Row>
       <Row>
         <Col xs={12} md={6} lg={3}>
-          <Card style={{ marginTop: "20px" }}>
+          <Card style={{ marginTop: "30px" }}>
             <Card.Body>
-              <h6>Upcoming Classes</h6>
+              <h6 style={{color: blue}}>Upcoming Classes</h6>
               {upcomingClasses.map((upcomingClass, index) => (
                 <p
                   key={index}
@@ -157,7 +161,7 @@ const Dashboard = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Col xs={12} md={6} lg={3}>
+        {/* <Col xs={12} md={6} lg={3}>
           <Card style={{ marginTop: "20px" }}>
             <Card.Body>
               <h6>Class Schedule</h6>
@@ -166,9 +170,9 @@ const Dashboard = () => {
               <CalendarTodayIcon style={{ fontSize: "3rem", color: "#808080" }} />
             </Card.Body>
           </Card>
-        </Col>
+        </Col> */}
         <Col xs={12} md={6} lg={3}>
-          <Card style={{ marginTop: "20px" }}>
+          <Card style={{ marginTop: "30px" }}>
             <Card.Body>
               <h6>Attendance Records</h6>
               {attendanceRecords.map((attendanceRecord, index) => (
@@ -197,7 +201,7 @@ const Dashboard = () => {
         </Col> */}
         {/* settings */}
         <Col xs={12} md={6} lg={3}>
-          <Card style={{ marginTop: "20px" }}>
+          <Card style={{ marginTop: "30px" }}>
             <Card.Body>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Image
@@ -227,10 +231,10 @@ const Dashboard = () => {
           </Card>
         </Col> */}
       </Row>
-      <Row>
+      <Row style={{minHeight: "75vh", display: "flex", flexDirection: "column" }}>
         <Col
           xs={12}
-          style={{ padding: "20px", display: "flex", justifyContent: "space-between" }}
+          style={{ padding: "20px", display: "flex", justifyContent: "space-between" ,marginTop: "auto"}}
         >
           <p>© 2023 All rights reserved.</p>
           <Button variant="outline-dark" onClick={handleLogout}>
@@ -242,7 +246,10 @@ const Dashboard = () => {
     </Container>
     
   );
+
+    
 };
+
 
 
 export default Dashboard;
