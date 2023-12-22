@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Container,
@@ -27,17 +27,15 @@ const Dashboard = () => {
     { title: "New assignment uploaded", date: "March 7, 2023" },
     { title: "Upcoming class reminder", date: "March 8, 2023" },
   ]);
+  const [upcomingClasses, setupcomingClasses]= useState([{date: "No data yet", time: "", tutor: ""}])
 
-  const upcomingClasses = [
-    { date: "March 8, 2023", time: "10:00 AM - 11:00 AM", tutor: "Jane Doe" },
-    { date: "March 10, 2023", time: "2:00 PM - 3:00 PM", tutor: "John Smith" },
-  ];
+  const [attendanceRecords, setattendanceRecords] = useState([{ date: "No record Yet", status: "-" }])
 
-  const attendanceRecords = [
-    { date: "February 22, 2023", status: "Present" },
-    { date: "February 24, 2023", status: "Absent" },
-    { date: "February 28, 2023", status: "Present" },
-  ];
+  // const attendanceRecords = [
+  //   { date: "February 22, 2023", status: "Present" },
+  //   { date: "February 24, 2023", status: "Absent" },
+  //   { date: "February 28, 2023", status: "Present" },
+  // ];
 
   const documents = [
     { title: "Math Notes", date: "March 2, 2023" },
@@ -46,6 +44,55 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     // Add your logout logic here
+  };
+
+  useEffect(() => {
+
+    fetchSchedule();
+    fetchStudentData();
+
+  }, [])
+
+  const fetchStudentData = async () =>{
+    try {
+      const response = await fetch('http://localhost:3001/studentData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // body: JSON.stringify({ uid }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setattendanceRecords(data.Attendance)
+    } catch (error) {
+      console.error('Error fetching schedule:', error);
+    }
+  }
+
+  const fetchSchedule = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/studentSchedule', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // body: JSON.stringify({ uid }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setupcomingClasses(data)
+    } catch (error) {
+      console.error('Error fetching schedule:', error);
+    }
   };
 
   return (
