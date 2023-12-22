@@ -12,17 +12,15 @@ import {
   Form,
   Image,
 } from "react-bootstrap";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { setAssignments } from '../store';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [notifications, setNotifications] = useState([
     { title: "New assignment uploaded", date: "March 7, 2023" },
     { title: "Upcoming class reminder", date: "March 8, 2023" },
@@ -63,6 +61,8 @@ const Dashboard = () => {
       }
 
       const data = await response.json();
+      dispatch(setAssignments(data.Assignments));
+      console.log(data.Assignments)
       setattendanceRecords(data.Attendance)
     } catch (error) {
       console.error('Error fetching schedule:', error);

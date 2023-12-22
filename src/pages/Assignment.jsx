@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Container,
@@ -9,99 +9,52 @@ import {
 } from "react-bootstrap";
 import { FileEarmarkArrowUp } from "react-bootstrap-icons";
 
-const assignments = [
-  {
-    subject: "Math",
-    assignments: [
-      {
-        id: 1,
-        title: "Assignment 1",
-        description: "This is the first assignment.",
-        dueDate: "2023-03-08",
-        completed: false,
-      },
-      {
-        id: 12,
-        title: "Assignment 13",
-        description: "This is the thirteenth assignment.",
-        dueDate: "2023-03-08",
-        completed: false,
-      },
-      {
-        id: 12,
-        title: "Assignment 15",
-        description: "This is the thirteenth assignment.",
-        dueDate: "2023-03-08",
-        completed: false,
-      },
-    ],
-  },
-  {
-    subject: "Science",
-    assignments: [
-      {
-        id: 2,
-        title: "Assignment 2",
-        description: "This is the second assignment.",
-        dueDate: "2023-03-15",
-        completed: true,
-      },
-    ],
-  },
-  {
-    subject: "English",
-    assignments: [
-      {
-        id: 3,
-        title: "Assignment 3",
-        description: "This is the third assignment.",
-        dueDate: "2023-03-22",
-        completed: false,
-      },
-    ],
-  },
-  {
-    subject: "History",
-    assignments: [
-      {
-        id: 4,
-        title: "Assignment 4",
-        description: "This is the fourth assignment.",
-        dueDate: "2023-03-29",
-        completed: true,
-      },
-    ],
-  },
-  {
-    subject: "Social Studies",
-    assignments: [
-      {
-        id: 5,
-        title: "Assignment 5",
-        description: "This is the fifth assignment.",
-        dueDate: "2023-04-05",
-        completed: false,
-      },
-    ],
-  },
-];
-
-const subjects = [...new Set(assignments.map((assignment) => assignment.subject))];
-
 const AssignmentPage = () => {
+  const [assignments, setAssignments] = useState(null);
+
+  useEffect(() => {
+    fetchStudentData();
+  }, []);
+
+  const fetchStudentData = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/studentData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // body: JSON.stringify({ uid }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setAssignments(data.Assignments);
+    } catch (error) {
+      console.error("Error fetching schedule:", error);
+    }
+  };
+
+  const subjects = assignments ? Object.keys(assignments) : [];
   const [currentSubject, setCurrentSubject] = useState("All Subjects");
-  const [filteredAssignments, setFilteredAssignments] = useState(assignments);
+  const [filteredAssignments, setFilteredAssignments] = useState([]);
+
+  useEffect(() => {
+    if (currentSubject === "All Subjects") {
+      setFilteredAssignments(assignments ? Object.entries(assignments) : []);
+    } else {
+      setFilteredAssignments(
+        assignments && assignments[currentSubject]
+          ? [[currentSubject, assignments[currentSubject]]]
+          : []
+      );
+    }
+  }, [currentSubject, assignments]);
 
   const handleSubjectChange = (event) => {
     setCurrentSubject(event.target.value);
-    if (event.target.value === "All Subjects") {
-      setFilteredAssignments(assignments);
-    } else {
-      const filtered = assignments.filter(
-        (assignment) => assignment.subject === event.target.value
-      );
-      setFilteredAssignments(filtered);
-    }
   };
 
   const handleUpload = (e) => {
@@ -138,12 +91,12 @@ const AssignmentPage = () => {
           </Form>
         </Col>
       </Row>
-      {filteredAssignments.map((subject) => (
-        <Row key={subject.subject}>
+      {filteredAssignments.map(([subject, assignmentsList]) => (
+        <Row key={subject}>
           <Col xs={12}>
-            <h5>{subject.subject}</h5>
+            <h5>{subject}</h5>
             <ListGroup>
-              {subject.assignments.map((assignment) => (
+              {assignmentsList.map((assignment) => (
                 <ListGroup.Item key={assignment.id}>
                   <Row>
                     <Col>

@@ -6,6 +6,8 @@ import CoursesPage from './pages/Courses.jsx'
 import Assignment from './pages/Assignment.jsx'
 import TeacherDashboard from './pages/TeacherDash.jsx'
 import AssignmentSettings from './pages/TeacherAssignment.jsx'
+import {store} from './store.js';
+import { Provider } from 'react-redux';
 
 
 import {
@@ -38,5 +40,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 )
