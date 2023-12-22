@@ -1,10 +1,10 @@
-
-
+import React from "react"
+import StudentDash from "./pages/StudentDash"
 function App() {
 
   return (
       <>
-      <h1>Hello</h1>
+      <StudentDash />
       </>
   )
 }
