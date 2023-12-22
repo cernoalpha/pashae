@@ -216,7 +216,7 @@ const TeacherDashboard = () => {
                       />
                     </Form.Group>
 
-                    <Form.Group className="mb-3">
+                    {/* <Form.Group className="mb-3">
                       <Form.Label>Google Meet Link:</Form.Label>
                       <FormControl
                         type="text"
@@ -224,7 +224,7 @@ const TeacherDashboard = () => {
                         value={newClass.meetLink}
                         onChange={handleInputChange}
                       />
-                    </Form.Group>
+                    </Form.Group> */}
 
                     <Button
                       type="button"
