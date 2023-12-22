@@ -61,12 +61,6 @@ function App() {
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/cc">
-              My courses
-            </Nav.Link>
-            <Nav.Link as={Link} to="/contact">
-              Contact
-            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
