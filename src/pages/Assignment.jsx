@@ -23,58 +23,85 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 const assignments = [
   {
-    id: 1,
     subject: "Math",
-    title: "Assignment 1",
-    description: "This is the first assignment.",
-    dueDate: "2023-03-08",
-    completed: false,
+    assignments: [
+      {
+        id: 1,
+        title: "Assignment 1",
+        description: "This is the first assignment.",
+        dueDate: "2023-03-08",
+        completed: false,
+      },
+      {
+        id: 12,
+        title: "Assignment 13",
+        description: "This is the thirteenth assignment.",
+        dueDate: "2023-03-08",
+        completed: false,
+      },
+      {
+        id: 12,
+        title: "Assignment 15",
+        description: "This is the thirteenth assignment.",
+        dueDate: "2023-03-08",
+        completed: false,
+      },
+    ],
   },
   {
-    id: 2,
     subject: "Science",
-    title: "Assignment 2",
-    description: "This is the second assignment.",
-    dueDate: "2023-03-15",
-    completed: true,
+    assignments: [
+      {
+        id: 2,
+        title: "Assignment 2",
+        description: "This is the second assignment.",
+        dueDate: "2023-03-15",
+        completed: true,
+      },
+    ],
   },
   {
-    id: 3,
     subject: "English",
-    title: "Assignment 3",
-    description: "This is the third assignment.",
-    dueDate: "2023-03-22",
-    completed: false,
+    assignments: [
+      {
+        id: 3,
+        title: "Assignment 3",
+        description: "This is the third assignment.",
+        dueDate: "2023-03-22",
+        completed: false,
+      },
+    ],
   },
   {
-    id: 4,
     subject: "History",
-    title: "Assignment 4",
-    description: "This is the fourth assignment.",
-    dueDate: "2023-03-29",
-    completed: true,
+    assignments: [
+      {
+        id: 4,
+        title: "Assignment 4",
+        description: "This is the fourth assignment.",
+        dueDate: "2023-03-29",
+        completed: true,
+      },
+    ],
   },
   {
-    id: 5,
     subject: "Social Studies",
-    title: "Assignment 5",
-    description: "This is the fifth assignment.",
-    dueDate: "2023-04-05",
-    completed: false,
+    assignments: [
+      {
+        id: 5,
+        title: "Assignment 5",
+        description: "This is the fifth assignment.",
+        dueDate: "2023-04-05",
+        completed: false,
+      },
+    ],
   },
-//   {
-//     id: 12,
-//     subject: "Math",
-//     title: "Assignment 13",
-//     description: "This is the thirteenth assignment.",
-//     dueDate: "2023-03-08",
-//     completed: false,
-//   },
 ];
+
+const subjects = [...new Set(assignments.map((assignment) => assignment.subject))];
 
 const AssignmentPage = () => {
   const [currentSubject, setCurrentSubject] = useState("All Subjects");
-  const subjects = [...new Set(assignments.map((assignment) => assignment.subject))];
   const [filteredAssignments, setFilteredAssignments] = useState(assignments);
 
   const handleSubjectChange = (event) => {
@@ -121,27 +148,25 @@ const AssignmentPage = () => {
           <Typography variant="h5">{subject.subject}</Typography>
           <Paper elevation={3}>
             <List>
-              {assignments
-                .filter((assignment) => assignment.subject === subject.subject)
-                .map((assignment) => (
-                  <ListItem key={assignment.id}>
-                    <ListItemText
-                      primary={assignment.title}
-                      secondary={assignment.description}
-                    />
-                    <ListItemText align="right">{assignment.dueDate}</ListItemText>
-                    <Checkbox checked={assignment.completed} onChange={() => handleComplete(assignment.id)} />
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      size="small"
-                      startIcon={<FileUploadIcon />}
-                      onClick={handleUpload}
-                    >
-                      Upload
-                    </Button>
-                  </ListItem>
-                ))}
+              {subject.assignments.map((assignment) => (
+                <ListItem key={assignment.id}>
+                  <ListItemText
+                    primary={assignment.title}
+                    secondary={assignment.description}
+                  />
+                  <ListItemText align="right">{assignment.dueDate}</ListItemText>
+                  <Checkbox checked={assignment.completed} onChange={() => handleComplete(assignment.id)} />
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    startIcon={<FileUploadIcon />}
+                    onClick={handleUpload}
+                  >
+                    Upload
+                  </Button>
+                </ListItem>
+              ))}
             </List>
           </Paper>
         </Grid>
@@ -151,4 +176,3 @@ const AssignmentPage = () => {
 };
 
 export default AssignmentPage;
-

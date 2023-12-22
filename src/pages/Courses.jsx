@@ -20,85 +20,111 @@ const CourseListing = styled(Paper)(({ theme }) => ({
 }));
 
 const CoursesPage = () => {
-  // Temporary data for courses, now with descriptions
-  const tempCourses = [
-    {
-      id: 1,
-      name: "Introduction to React",
-      subject: "Computer Science",
-      gradeLevel: "High School",
-      teacherName: "Mr. Smith",
-      description: "Learn the basics of React, a popular JavaScript library for building user interfaces.",
-    },
-    {
-      id: 2,
-      name: "Algebra II",
-      subject: "Mathematics",
-      gradeLevel: "High School",
-      teacherName: "Mrs. Jones",
-      description: "Study advanced algebraic concepts such as polynomials, conic sections, and logarithms.",
-    },
-    {
-      id: 3,
-      name: "English Literature",
-      subject: "English",
-      gradeLevel: "High School",
-      teacherName: "Mr. Brown",
-      description: "Explore classic and contemporary literature, developing critical thinking and analytical skills.",
-    },
-    {
-      id: 4,
-      name: "Biology",
-      subject: "Science",
-      gradeLevel: "High School",
-      teacherName: "Ms. Green",
-      description: "Investigate the fundamental principles of life, including cells, genetics, and evolution.",
-    },
-    {
-      id: 5,
-      name: "World History",
-      subject: "Social Studies",
-      gradeLevel: "High School",
-      teacherName: "Mr. White",
-      description: "Journey through major historical events and civilizations, examining their impact on the present.",
-    },
-        {
+  // Temporary data structures for courses and enrolled courses (replace with actual API calls)
+  const tempCourses = {
+    "Computer Science": [
+      {
+        id: 1,
+        name: "Introduction to React",
+        gradeLevel: "High School",
+        teacherName: "Mr. Smith",
+        description: "Learn the basics of React, a popular JavaScript library for building user interfaces.",
+      },
+      {
         id: 12,
         name: "Introduction to Vue",
-        subject: "Computer Science",
         gradeLevel: "High School",
         teacherName: "Mr. JoeShmo",
         description: "Learn the basics of Vue, a popular JavaScript framework for building user interfaces.",
       },
-  ];
+      {
+        id: 14,
+        name: "Introduction to Next",
+        gradeLevel: "High School",
+        teacherName: "Mr. JoeShmo",
+        description: "Learn the basics of Vue, a popular JavaScript framework for building user interfaces.",
+      },
+    ],
+    "Mathematics": [
+      {
+        id: 2,
+        name: "Algebra II",
+        gradeLevel: "High School",
+        teacherName: "Mrs. Jones",
+        description: "Study advanced algebraic concepts such as polynomials, conic sections, and logarithms.",
+      },
+    ],
+    "English": [
+      {
+        id: 3,
+        name: "English Literature",
+        gradeLevel: "High School",
+        teacherName: "Mr. Brown",
+        description: "Explore classic and contemporary literature, developing critical thinking and analytical skills.",
+      },
+    ],
+    "Science": [
+      {
+        id: 4,
+        name: "Biology",
+        gradeLevel: "High School",
+        teacherName: "Ms. Green",
+        description: "Investigate the fundamental principles of life, including cells, genetics, and evolution.",
+      },
+    ],
+    "Social Studies": [
+      {
+        id: 5,
+        name: "World History",
+        gradeLevel: "High School",
+        teacherName: "Mr. White",
+        description: "Journey through major historical events and civilizations, examining their impact on the present.",
+      },
+    ],
+  };
 
-  // State to store the list of courses
-  const [courses, setCourses] = useState([]);
+  const tempEnrolledCourses = [1, 3];
 
-  // State for search query, filter criteria, and active section
+  // State variables
+  const [courses, setCourses] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [filterGradeLevel, setFilterGradeLevel] = useState("");
   const [activeSection, setActiveSection] = useState("");
+  const [enrolledCourses, setEnrolledCourses] = useState(tempEnrolledCourses);
+
+  // Group courses by subject
+  const groupedCourses = Object.keys(courses).reduce((acc, subject) => {
+    acc[subject] = courses[subject].map((course) => course);
+    return acc;
+  }, {});
+
+  // Filter courses
+  const filteredCourses = Object.keys(groupedCourses).reduce((acc, subject) => {
+    acc[subject] = groupedCourses[subject]
+    .filter((course) => {
+      return (course.name.toLowerCase().includes(searchQuery.toLowerCase()) || course.id == searchQuery) &&
+      (!filterGradeLevel || course.gradeLevel === filterGradeLevel);
+    });
+    return acc;
+  }, {});
+
+  // Handle course enrollment (placeholder)
+  const handleEnroll = (course) => {
+    // Check if the course is already enrolled
+    if (enrolledCourses.includes(course.id)) {
+      alert(`You are already enrolled in ${course.name}.`);
+      return;
+    }
+    alert(`Enrolling in ${course.name}...`);
+
+    // Add the course ID to the enrolledCourses state
+    setEnrolledCourses([...enrolledCourses, course.id]);
+  };
 
   // Fetch course data from the server (replace with actual API call)
   useEffect(() => {
     setCourses(tempCourses);
   }, []);
-
-  // Group courses by subject
-  const groupedCourses = courses.reduce((acc, course) => {
-    const subject = course.subject;
-    if (!acc[subject]) {
-      acc[subject] = [];
-    }
-    acc[subject].push(course);
-    return acc;
-  }, {});
-
-  // Function to handle course enrollment (placeholder)
-  const handleEnroll = (course) => {
-    alert(`Enrolling in ${course.name}...`);
-  };
 
   return (
     <Container>
@@ -132,45 +158,41 @@ const CoursesPage = () => {
             <MenuItem value="High School">High School</MenuItem>
           </TextField>
         </Grid>
-        {Object.keys(groupedCourses).map((subject) => (
+        {Object.keys(filteredCourses).map((subject) => (
           <Grid item xs={12} key={subject}>
             <Typography variant="h5">{subject}</Typography>
             <Grid container spacing={2}>
-              {groupedCourses[subject]
-                .filter((course) => {
-                  return (course.name.toLowerCase().includes(searchQuery.toLowerCase()) || course.id == searchQuery) &&
-                    (!filterGradeLevel || course.gradeLevel === filterGradeLevel);
-                })
-                .length > 0 ? (
-                groupedCourses[subject]
-                  .filter((course) => {
-                    return (course.name.toLowerCase().includes(searchQuery.toLowerCase()) || course.id == searchQuery) &&
-                    (!filterGradeLevel || course.gradeLevel === filterGradeLevel);
-                  })
-                  .map((course) => (
-                    <Grid item xs={4} key={course.id}>
-                      <CourseListing onMouseEnter={() => setActiveSection(course.id)} onMouseLeave={() => setActiveSection("")}>
-                        <Typography variant="h6">{course.name}</Typography>
-                        <Typography variant="subtitle1">{course.gradeLevel}</Typography>
-                        <Typography variant="subtitle1">{course.teacherName}</Typography>
-                        <Grow in={activeSection === course.id} timeout={400}>
-                          <Typography variant="body2" sx={{
+              {filteredCourses[subject].length > 0 ? (
+                filteredCourses[subject].map((course) => (
+                  <Grid item xs={4} key={course.id}>
+                    <CourseListing onMouseEnter={() => setActiveSection(course.id)} onMouseLeave={() => setActiveSection("")}>
+                      <Typography variant="h6">{course.name}</Typography>
+                      <Typography variant="subtitle1">{course.gradeLevel}</Typography>
+                      <Typography variant="subtitle1">{course.teacherName}</Typography>
+                      <Grow in={activeSection === course.id} timeout={400}>
+                        <Typography variant="body2"  sx={{
                             fontStyle: activeSection === course.id ? 'inherit' : 'italic',
                             transition: 'all 0.3s ease-in-out',
                             marginTop: '8px',
-                          }} >
-                            {course.description}
-                          </Typography>
-                        </Grow>
+                          }}>
+                          {course.description}
+                        </Typography>
+                      </Grow>
+                      {enrolledCourses.includes(course.id) ? (
+                        <Button variant="contained" disabled>
+                          Enrolled
+                        </Button>
+                      ) : (
                         <Button variant="contained" color="primary" onClick={() => handleEnroll(course)}>
                           Enroll
                         </Button>
-                      </CourseListing>
-                    </Grid>
-                  ))
+                      )}
+                    </CourseListing>
+                  </Grid>
+                ))
               ) : (
                 <Grid item xs={12}>
-            <Typography variant="body1" >
+          <Typography variant="body1">
                     No results found
                   </Typography>
                 </Grid>
