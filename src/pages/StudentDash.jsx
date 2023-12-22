@@ -91,6 +91,8 @@ const Dashboard = () => {
       <Grid item xs={12} md={6} lg={3}>
         <Paper sx={{ padding: "20px" }}>
           <Typography variant="h6">Class Schedule</Typography>
+          <h3>hello</h3>
+          <Button variant="contained">Contained</Button>
           <CalendarTodayIcon sx={{ fontSize: "3rem", color: "#808080" }} />
         </Paper>
       </Grid>
