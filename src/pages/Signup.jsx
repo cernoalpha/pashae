@@ -1,13 +1,49 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import * as Components from "../components/Components";
-import { Navbar, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Navbar, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function App() {
-  
+  const [teacherData, setTeacherData] = useState({
+    email: "",
+    name: "",
+    password: "",
+  });
 
-  const [password, setPassword] = useState('');
+  const [studentData, setStudentData] = useState({
+    email: "",
+    parentEmail: "",
+    phone: "",
+    password: "",
+  });
+  const handleTeacherSignup = (data) => {
+    // Perform actions with teacherData, e.g., send it to a server
+    console.log("Teacher Signup:", data);
+  };
+
+  const handleStudentSignup = (data) => {
+    // Perform actions with studentData, e.g., send it to a server
+    console.log("Student Signup:", data);
+  };
+
+  const handleTeacherChange = (e) => {
+    const { name, value } = e.target;
+    setTeacherData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleStudentChange = (e) => {
+    const { name, value } = e.target;
+    setStudentData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
@@ -17,31 +53,57 @@ function App() {
   const [signIn, toggle] = React.useState(true);
   return (
     <>
-    <Navbar bg="dark" variant="dark" expand="lg">
-  <Navbar.Brand as={Link} to="/"></Navbar.Brand>
-  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="justify-content-start">
-      <Nav.Link as={Link} to="/">Home</Nav.Link>
-      <Nav.Link as={Link} to="/cc">My courses</Nav.Link>
-      <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-    </Nav>
-  </Navbar.Collapse>
-</Navbar>
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar.Brand as={Link} to="/"></Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="justify-content-start">
+            <Nav.Link as={Link} to="/">
+              Home
+            </Nav.Link>
+            <Nav.Link as={Link} to="/cc">
+              My courses
+            </Nav.Link>
+            <Nav.Link as={Link} to="/contact">
+              Contact
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
 
       <center>
         <Components.Container>
           <Components.SignUpContainer signinIn={signIn}>
             <Components.Form>
               <Components.Title>Teacher</Components.Title>
-              <Components.Input required type="email" placeholder="email" />
-              <Components.Input required type="text" placeholder="Name" />
-              <Components.Input type="password" placeholder="Password" />
-              
+              <Components.Input
+                required
+                type="email"
+                placeholder="email"
+                onChange={handleTeacherChange}
+                value={teacherData.email}
+              />
+              <Components.Input
+                required
+                type="text"
+                placeholder="Name"
+                onChange={handleTeacherChange}
+                value={teacherData.name}
+              />
+              <Components.Input
+                type="password"
+                placeholder="Password"
+                onChange={handleTeacherChange}
+                value={teacherData.password}
+              />
+
               <br />
 
-              <Components.Button style={{ cursor: "pointer" }}>
-                Sigin Up
+              <Components.Button
+                style={{ cursor: "pointer" }}
+                onClick={() => handleTeacherSignup(teacherData)}
+              >
+                Sign Up
               </Components.Button>
             </Components.Form>
           </Components.SignUpContainer>
@@ -49,18 +111,38 @@ function App() {
           <Components.SignInContainer signinIn={signIn}>
             <Components.Form>
               <Components.Title>Student</Components.Title>
-              <Components.Input type="email" placeholder="email" />
-              <Components.Input type="email" placeholder="Parent's Email" />
+              <Components.Input
+                type="email"
+                placeholder="email"
+                value={studentData.email}
+                onChange={handleStudentChange}
+              />
+              <Components.Input
+                type="email"
+                placeholder="Parent's Email"
+                value={studentData.parentEmail}
+                onChange={handleStudentChange}
+              />
               <Components.Input
                 type="tel"
                 pattern="[0-9]{10}"
                 placeholder="Phone"
+                value={studentData.phone}
+                onChange={handleStudentChange}
                 maxLength="10"
               />
-              <Components.Input type="password" placeholder="Password" />
+              <Components.Input
+                type="password"
+                placeholder="Password"
+                value={studentData.password}
+                onChange={handleStudentChange}
+              />
               <br />
               <a href="/">
-                <Components.Button style={{ cursor: "pointer" }}>
+                <Components.Button
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleStudentSignup(studentData)}
+                >
                   Sigin Up
                 </Components.Button>
               </a>
