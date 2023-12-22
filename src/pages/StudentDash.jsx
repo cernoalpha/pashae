@@ -98,8 +98,8 @@ const Dashboard = () => {
   return (
     <Container fluid>
       
-        <nav class="navbar navbar-light bg-light justify-content-between" style={{padding: "20px"}}>
-        <div className="container">
+        <nav className="navbar navbar-light bg-success rounded-pill justify-content-between"  >
+        <div className="container" >
           <a class="navbar-brand" style={{ fontSize:"20px"}}>App Name</a>
          
            <form className="d-flex ml-auto" style={{fontSize:"15px"}} >
@@ -110,14 +110,14 @@ const Dashboard = () => {
          </div>
     
     
-          <div class="con">
+          <div class="con" >
             <form class="d-flex" role="search">
               <div className="d-flex">
                 <img
-                   src="/Assets/erwin.jpg" // Replace with the actual path to the teacher's image
+                   src="/Assets/erwin.jpg" 
                   alt="Teacher"
                   className="img-fluid rounded-circle"
-                   style={{ width: "40px", height: "40px", cursor: "pointer" }}
+                   style={{ width: "40px", height: "40px", cursor: "pointer",marginRight:"30px" }}
                   onClick={handleOpenProfileModal}
                 />
              </div>
