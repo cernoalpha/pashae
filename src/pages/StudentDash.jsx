@@ -20,7 +20,7 @@ import { blue } from "@mui/material/colors";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   const [notifications, setNotifications] = useState([
     { title: "New assignment uploaded", date: "March 7, 2023" },
     { title: "Upcoming class reminder", date: "March 8, 2023" },
@@ -61,7 +61,6 @@ const Dashboard = () => {
       }
 
       const data = await response.json();
-      dispatch(setAssignments(data.Assignments));
       console.log(data.Assignments)
       setattendanceRecords(data.Attendance)
     } catch (error) {
