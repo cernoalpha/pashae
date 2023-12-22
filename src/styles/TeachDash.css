@@ -1,0 +1,10 @@
+.course{
+    background-color: #fed9ff;
+  width: 1000px;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+  padding: 20px;
+  
+}
