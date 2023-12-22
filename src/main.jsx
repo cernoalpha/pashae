@@ -11,6 +11,8 @@ import {store} from './store.js';
 import { Provider } from 'react-redux';
 import Login from "./pages/Login.jsx"
 import Signup from "./pages/Signup.jsx"
+import Home from "./pages/Home.jsx"
+import StudentDash from "./pages/StudentDash"
 
 
 import {
@@ -21,11 +23,19 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
   },
   {
-    path: "/cor",
-    element: <CoursesPage />,
+    path: "/signin",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
+    path: "/studentdash",
+    element: <StudentDash />,
   },
   {
     path: "/assignment",
@@ -42,14 +52,6 @@ const router = createBrowserRouter([
   {
     path: "/cc",
     element: <CourseCreationPage />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
   },
 
 ]);
