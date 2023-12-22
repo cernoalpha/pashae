@@ -17,6 +17,15 @@ function App() {
     phone: "",
     password: "",
   });
+  const handleTeacherSignup = (data) => {
+    // Perform actions with teacherData, e.g., send it to a server
+    console.log("Teacher Signup:", data);
+  };
+
+  const handleStudentSignup = (data) => {
+    // Perform actions with studentData, e.g., send it to a server
+    console.log("Student Signup:", data);
+  };
 
   const handleTeacherChange = (e) => {
     const { name, value } = e.target;
@@ -90,7 +99,10 @@ function App() {
 
               <br />
 
-              <Components.Button style={{ cursor: "pointer" }}>
+              <Components.Button
+                style={{ cursor: "pointer" }}
+                onClick={() => handleTeacherSignup(teacherData)}
+              >
                 Sign Up
               </Components.Button>
             </Components.Form>
@@ -127,7 +139,10 @@ function App() {
               />
               <br />
               <a href="/">
-                <Components.Button style={{ cursor: "pointer" }}>
+                <Components.Button
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleStudentSignup(studentData)}
+                >
                   Sigin Up
                 </Components.Button>
               </a>
