@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import CoursesPage from './pages/Courses.jsx'
 import Assignment from './pages/Assignment.jsx'
+import TeacherDashboard from './pages/TeacherDash.jsx'
 
 import {
   createBrowserRouter,
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/assignment",
     element: <Assignment />,
+  },
+  {
+    path: "/tec",
+    element: <TeacherDashboard />,
   },
 
 ]);
