@@ -33,25 +33,31 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
+  // student section
   {
     path: "/studentdash",
     element: <StudentDash />,
   },
   {
-    path: "/assignment",
-    element: <Assignment />,
+    path: "/coursespage",
+    element: <CoursesPage />,
   },
   {
-    path: "/tec",
+    path: "/assignments",
+    element: <Assignment />,
+  },
+  // teacher section
+  {
+    path: "/teacherdash",
     element: <TeacherDashboard />,
   },
   {
-    path: "/teca",
-    element: <AssignmentSettings />,
+    path: "/createcourse",
+    element: <CourseCreationPage />,
   },
   {
-    path: "/cc",
-    element: <CourseCreationPage />,
+    path: "/createass",
+    element: <AssignmentSettings />,
   },
 
 ]);

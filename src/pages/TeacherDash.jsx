@@ -29,17 +29,12 @@ const TeacherDashboard = () => {
       courseName: "React Programming",
       students: [
         { id: 1, name: "Student 1" },
-        { id: 2, name: "Student 2" },
-        { id: 3, name: "Student 3" },
-        { id: 3, name: "Student 9" },
       ],
     },
     {
       courseName: "JavaScript Fundamentals",
       students: [
         { id: 4, name: "Student 4" },
-        { id: 5, name: "Student 5" },
-        { id: 6, name: "Student 6" },
       ],
     },
   ];
@@ -126,17 +121,18 @@ const TeacherDashboard = () => {
   return (
     <>
       <div className="main-wrapper">
-      <Navbar bg="dark" variant="dark" expand="lg">
-  <Navbar.Brand as={Link} to="/"></Navbar.Brand>
-  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="justify-content-start">
-      <Nav.Link as={Link} to="/">Home</Nav.Link>
-      <Nav.Link as={Link} to="/cc">My courses</Nav.Link>
-      <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-    </Nav>
-  </Navbar.Collapse>
-</Navbar>
+        <Navbar bg="dark" variant="dark" expand="lg">
+          <Navbar.Brand as={Link} to="/"></Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="justify-content-start">
+              <Nav.Link as={Link} to="/teacherdash">Home</Nav.Link>
+              <Nav.Link as={Link} to="/createcourse">My Courses</Nav.Link>
+              <Nav.Link as={Link} to="/createass">Assignments</Nav.Link>
+
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
 
         <br />
         <Container className="mt-3">
@@ -154,7 +150,6 @@ const TeacherDashboard = () => {
                       {student.name}
                       <div className="button-container">
                         <Button className="btn mx-2 btn-primary" onClick={handleCreateClass}>Schedule Class</Button>
-                        {/* <Button className="btn btn-primary">Assignment</Button> */}
                       </div>
                     </li>
                   ))}
@@ -215,17 +210,6 @@ const TeacherDashboard = () => {
                         onChange={handleInputChange}
                       />
                     </Form.Group>
-
-                    {/* <Form.Group className="mb-3">
-                      <Form.Label>Google Meet Link:</Form.Label>
-                      <FormControl
-                        type="text"
-                        name="meetLink"
-                        value={newClass.meetLink}
-                        onChange={handleInputChange}
-                      />
-                    </Form.Group> */}
-
                     <Button
                       type="button"
                       onClick={handleSaveClass}
