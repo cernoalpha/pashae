@@ -1,25 +1,13 @@
 import React, { useState } from "react";
 import {
-  Grid,
-  Paper,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemButton,
-  Divider,
   Button,
-  Avatar,
-  TextField,
-  IconButton,
-  Menu,
-  MenuItem,
-  Checkbox,
-  Select,
-  FormControl,
-  InputLabel,
-} from "@mui/material";
-import FileUploadIcon from "@mui/icons-material/FileUpload";
+  Container,
+  Form,
+  ListGroup,
+  Row,
+  Col,
+} from "react-bootstrap";
+import { FileEarmarkArrowUp } from "react-bootstrap-icons";
 
 const assignments = [
   {
@@ -109,7 +97,9 @@ const AssignmentPage = () => {
     if (event.target.value === "All Subjects") {
       setFilteredAssignments(assignments);
     } else {
-      const filtered = assignments.filter((assignment) => assignment.subject === event.target.value);
+      const filtered = assignments.filter(
+        (assignment) => assignment.subject === event.target.value
+      );
       setFilteredAssignments(filtered);
     }
   };
@@ -123,55 +113,68 @@ const AssignmentPage = () => {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Typography variant="h4">Assignments</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Paper elevation={3}>
-          <FormControl fullWidth>
-            <InputLabel id="subject-select-label">Subject</InputLabel>
-            <Select labelId="subject-select-label" value={currentSubject} onChange={handleSubjectChange}>
-              <MenuItem value="All Subjects">All Subjects</MenuItem>
-              {subjects.map((subject) => (
-                <MenuItem key={subject} value={subject}>
-                  {subject}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <Divider />
-        </Paper>
-      </Grid>
+    <Container fluid>
+      <Row>
+        <Col xs={12}>
+          <h4>Assignments</h4>
+        </Col>
+        <Col xs={12}>
+          <Form>
+            <Form.Group controlId="subjectSelect">
+              <Form.Label>Subject</Form.Label>
+              <Form.Control
+                as="select"
+                value={currentSubject}
+                onChange={handleSubjectChange}
+              >
+                <option value="All Subjects">All Subjects</option>
+                {subjects.map((subject) => (
+                  <option key={subject} value={subject}>
+                    {subject}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          </Form>
+        </Col>
+      </Row>
       {filteredAssignments.map((subject) => (
-        <Grid item xs={12} key={subject.subject}>
-          <Typography variant="h5">{subject.subject}</Typography>
-          <Paper elevation={3}>
-            <List>
+        <Row key={subject.subject}>
+          <Col xs={12}>
+            <h5>{subject.subject}</h5>
+            <ListGroup>
               {subject.assignments.map((assignment) => (
-                <ListItem key={assignment.id}>
-                  <ListItemText
-                    primary={assignment.title}
-                    secondary={assignment.description}
-                  />
-                  <ListItemText align="right">{assignment.dueDate}</ListItemText>
-                  <Checkbox checked={assignment.completed} onChange={() => handleComplete(assignment.id)} />
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    startIcon={<FileUploadIcon />}
-                    onClick={handleUpload}
-                  >
-                    Upload
-                  </Button>
-                </ListItem>
+                <ListGroup.Item key={assignment.id}>
+                  <Row>
+                    <Col>
+                      <div>
+                        <strong>{assignment.title}</strong>
+                        <p>{assignment.description}</p>
+                      </div>
+                    </Col>
+                    <Col className="text-right">
+                      <p>{assignment.dueDate}</p>
+                      <Form.Check
+                        type="checkbox"
+                        checked={assignment.completed}
+                        onChange={() => handleComplete(assignment.id)}
+                      />
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        onClick={handleUpload}
+                      >
+                        <FileEarmarkArrowUp /> Upload
+                      </Button>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
               ))}
-            </List>
-          </Paper>
-        </Grid>
+            </ListGroup>
+          </Col>
+        </Row>
       ))}
-    </Grid>
+    </Container>
   );
 };
 
