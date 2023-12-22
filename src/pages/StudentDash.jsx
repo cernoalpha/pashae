@@ -52,7 +52,28 @@ const Dashboard = () => {
     <Container fluid>
       <Row>
         <Col xs={12}>
-          <Navbar bg="light" expand="lg">
+         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+           <a class="navbar-brand" href="#">Logo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 Dropdown
+                 </a>
+                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+         </nav>
+          {/* <Navbar bg="light" expand="lg">
             <Navbar.Brand>Welcome back, John!</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -69,7 +90,7 @@ const Dashboard = () => {
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
-          </Navbar>
+          </Navbar> */}
         </Col>
       </Row>
       <Row>
@@ -111,7 +132,7 @@ const Dashboard = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Col xs={12} md={6} lg={3}>
+        {/* <Col xs={12} md={6} lg={3}>
           <Card style={{ marginTop: "20px" }}>
             <Card.Body>
               <h6>Documents</h6>
@@ -126,7 +147,8 @@ const Dashboard = () => {
               ))}
             </Card.Body>
           </Card>
-        </Col>
+        </Col> */}
+        {/* settings */}
         <Col xs={12} md={6} lg={3}>
           <Card style={{ marginTop: "20px" }}>
             <Card.Body>
@@ -138,13 +160,10 @@ const Dashboard = () => {
                 />
                 <h6>John Doe</h6>
               </div>
-              <Button variant="outline-dark" endIcon={<SettingsIcon />}>
-                Settings
-              </Button>
             </Card.Body>
           </Card>
         </Col>
-        <Col xs={12} md={6} lg={3}>
+        {/* <Col xs={12} md={6} lg={3}>
           <Card style={{ marginTop: "20px" }}>
             <Card.Body>
               <h6>Chat</h6>
@@ -159,7 +178,7 @@ const Dashboard = () => {
               <Button variant="contained">Send</Button>
             </Card.Body>
           </Card>
-        </Col>
+        </Col> */}
       </Row>
       <Row>
         <Col
@@ -174,7 +193,9 @@ const Dashboard = () => {
         </Col>
       </Row>
     </Container>
+    
   );
 };
+
 
 export default Dashboard;
