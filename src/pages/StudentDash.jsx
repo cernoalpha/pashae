@@ -97,24 +97,6 @@ const Dashboard = () => {
 
   return (
     <Container fluid>
-<<<<<<< HEAD
-        <nav class="navbar navbar-dark bg-dark justify-content-between" style={{ padding: "10px 10px" }}>
-          <a class="navbar-brand" style={{ color: "white" }}>Padh-AI</a>
-          <form class="d-flex" role="search">
-            <div className="d-flex">
-              <img
-                src="/Assets/erwin.jpg" 
-                alt="Teacher"
-                className="img-fluid rounded-circle"
-                style={{ width: "40px", height: "40px", cursor: "pointer" }}
-                onClick={handleOpenProfileModal}
-              />
-            </div>
-          </form>
-        </nav>
-      
-      <Modal show={openProfileModal} onHide={handleCloseProfileModal}>
-=======
       
         <nav class="navbar navbar-light bg-light justify-content-between" style={{padding: "20px"}}>
         <div className="container">
@@ -144,7 +126,6 @@ const Dashboard = () => {
   
         </nav>
        <Modal show={openProfileModal} onHide={handleCloseProfileModal} >
->>>>>>> b29209701229874b5ad9c03d225bf28a0ed76831
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body className="text-center">
         
@@ -186,21 +167,12 @@ const Dashboard = () => {
               </Nav>
             </Navbar.Collapse>
           </Navbar> */}
-<<<<<<< HEAD
-      <a href="/cor"><button className="btn btn-primary">courses</button></a>
-      <Row style={{ paddingLeft: "20px", paddingRight: "20px" }}>
-        <Col xs={12} md={6} lg={8}>
-          <Card style={{ marginTop: "30px" }}>
-            <Card.Body>
-              <h6 style={{ color: blue }}>Upcoming Classes</h6>
-=======
         
       <Row style={{paddingLeft: "20px",paddingRight:"20px"}}>
         <Col xs={12} md={6} lg={8}>
           <Card style={{ marginTop: "30px" }}>
             <Card.Body>
               <h4 style={{color: blue}}>Upcoming Classes</h4>
->>>>>>> b29209701229874b5ad9c03d225bf28a0ed76831
               {upcomingClasses.map((upcomingClass, index) => (
                 <p
                   key={index}
