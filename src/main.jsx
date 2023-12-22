@@ -5,6 +5,7 @@ import './index.css'
 import CoursesPage from './pages/Courses.jsx'
 import Assignment from './pages/Assignment.jsx'
 import TeacherDashboard from './pages/TeacherDash.jsx'
+import AssignmentSettings from './pages/TeacherAssignment.jsx'
 
 import {
   createBrowserRouter,
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/tec",
     element: <TeacherDashboard />,
+  },
+  {
+    path: "/teca",
+    element: <AssignmentSettings />,
   },
 
 ]);
