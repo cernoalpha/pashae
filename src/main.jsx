@@ -9,6 +9,8 @@ import AssignmentSettings from './pages/TeacherAssignment.jsx'
 import CourseCreationPage from "./pages/AddCourse.jsx"
 import {store} from './store.js';
 import { Provider } from 'react-redux';
+import Login from "./pages/Login.jsx"
+import Signup from "./pages/Signup.jsx"
 
 
 import {
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
   {
     path: "/cc",
     element: <CourseCreationPage />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
   },
 
 ]);
