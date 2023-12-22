@@ -4,6 +4,7 @@ import {
   Container,
   Row,
   Col,
+  Modal,
   Card,
   Image,
 } from "react-bootstrap";
@@ -11,6 +12,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 
 import { blue } from "@mui/material/colors";
+
 
 
 const Dashboard = () => {
@@ -83,39 +85,55 @@ const Dashboard = () => {
       console.error('Error fetching schedule:', error);
     }
   };
+  const [openProfileModal, setOpenProfileModal] = useState(false);
+
+  const handleOpenProfileModal = () => {
+    setOpenProfileModal(true);
+  };
+
+  const handleCloseProfileModal = () => {
+    setOpenProfileModal(false);
+  };
 
   return (
     <Container fluid>
-      <Row>
-        <Col xs={12}>
-         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-           <a className="navbar-brand" href="#">App Name</a>
-           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-             <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav "> 
-                  <li className="nav-item dropdown ml-auto">
-                    <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                       <Image
-                            src="https://via.placeholder.com/60"
-                             roundedCircle
-                              style={{ width: 60, height: 60, marginRight: "20px" }}
-                        />
-                        <h6>John Doe</h6>
-                      </div>
-                    </a>
-                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                     <a className="dropdown-item" href="#">Action</a>
-                     <a className="dropdown-item" href="#">Another action</a>
-                     <div className="dropdown-divider"></div>
-                     <a className="dropdown-item" href="#">Something else here</a>
-                    </div>
-                 </li>
-                </ul>
-             </div>
-          </nav>
+      
+        <nav class="navbar navbar-light bg-light justify-content-between" style={{padding: "20px"}}>
+  <a class="navbar-brand" style={{color: "blue"}}>App Name</a>
+  <form class="d-flex" role="search">
+            <div className="d-flex">
+              <img
+                src="/Assets/erwin.jpg" // Replace with the actual path to the teacher's image
+                alt="Teacher"
+                className="img-fluid rounded-circle"
+                style={{ width: "40px", height: "40px", cursor: "pointer" }}
+                onClick={handleOpenProfileModal}
+              />
+            </div>
+          </form>
+</nav>
+<Modal show={openProfileModal} onHide={handleCloseProfileModal}>
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body className="text-center">
+          <img
+            src="/Assets/erwin.jpg"
+            alt="Teacher"
+            className="img-fluid rounded-circle"
+            style={{ width: "100px", height: "100px", margin: "auto" }}
+          />
+          <h5 className="font-weight-bold mt-2">John Doe</h5>
+          <p>john.doe@example.com</p>
+
+          <div className="mt-2">
+            <Button variant="primary" className="mr-2 mx-2">
+              Reset Password
+            </Button>
+            <Button variant="danger-outline" className="btn btn-outline-danger">
+              Sign Out
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
 
           {/* <Navbar bg="light" expand="lg">
             <Navbar.Brand>Welcome back, John!</Navbar.Brand>
@@ -135,10 +153,9 @@ const Dashboard = () => {
               </Nav>
             </Navbar.Collapse>
           </Navbar> */}
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12} md={6} lg={3}>
+       <a href="/cor"><button className="btn btn-primary">courses</button></a> 
+      <Row style={{paddingLeft: "20px",paddingRight:"20px"}}>
+        <Col xs={12} md={6} lg={8}>
           <Card style={{ marginTop: "30px" }}>
             <Card.Body>
               <h6 style={{color: blue}}>Upcoming Classes</h6>
@@ -164,7 +181,7 @@ const Dashboard = () => {
             </Card.Body>
           </Card>
         </Col> */}
-        <Col xs={12} md={6} lg={3}>
+        <Col xs={12} md={6} lg={4}>
           <Card style={{ marginTop: "30px" }}>
             <Card.Body>
               <h6>Attendance Records</h6>
@@ -192,31 +209,32 @@ const Dashboard = () => {
             </Card.Body>
           </Card>
         </Col> */}
-        {/* settings */}
-        <Col xs={12} md={6} lg={3}>
-          <Card style={{ marginTop: "30px" }}>
-            <Card.Body>
-              
-            </Card.Body>
-          </Card>
-        </Col>
-        {/* <Col xs={12} md={6} lg={3}>
-          <Card style={{ marginTop: "20px" }}>
-            <Card.Body>
-              <h6>Chat</h6>
-              <Form.Group>
-                <TextField
-                  multiline
-                  rows={4}
-                  placeholder="Type your message here..."
-                  style={{ width: "100%", marginBottom: "10px" }}
-                />
-              </Form.Group>
-              <Button variant="contained">Send</Button>
-            </Card.Body>
-          </Card>
-        </Col> */}
+        {/* settings */} 
       </Row>
+      <Row style={{ marginTop: "30px", padding:"20px"} }><h4>Selected Courses</h4></Row>
+      <div class="card-deck row" style={{padding:"20px"}}>
+  <div class="card col-lg-3 mx-5 text-center">
+    <img class="card-img-top" src="..." alt="Card image cap"></img>
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+    </div>
+   
+  </div>
+  <div class="card col-lg-3 mx-5 text-center">
+    <img class="card-img-top" src="..." alt="Card image cap"></img>
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+    </div>
+    
+  </div>
+  <div class="card col-lg-3 mx-5 text-center">
+    <img class="card-img-top" src="..." alt="Card image cap"></img>
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+    
+  </div>
+</div></div>
+
       <Row style={{minHeight: "75vh", display: "flex", flexDirection: "column" }}>
         <Col
           xs={12}
@@ -229,6 +247,7 @@ const Dashboard = () => {
           </Button>
         </Col>
       </Row>
+      
     </Container>
     
   );
