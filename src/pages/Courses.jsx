@@ -11,6 +11,8 @@ import {
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Courses.css"
+import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const CourseListing = ({ course, onMouseEnter, onMouseLeave, isActive, handleEnroll, enrolledCourses }) => (
   <Card
@@ -134,6 +136,19 @@ const CoursesPage = () => {
   }
 
   return (
+    <>
+    <Navbar bg="dark" variant="dark" expand="lg">
+  <Navbar.Brand as={Link} to="/"></Navbar.Brand>
+  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+  <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className="justify-content-start">
+      <Nav.Link as={Link} to="/">Home</Nav.Link>
+      <Nav.Link as={Link} to="/cc">My courses</Nav.Link>
+      <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
+
     <Container className="my-4 py-4">
       <Row>
         <Col xs={12} className="text-center">
@@ -144,7 +159,7 @@ const CoursesPage = () => {
             <FormControl
               placeholder="Search courses or ID"
               onChange={(e) => setSearchQuery(e.target.value)}
-            />
+              />
             <InputGroup.Text id="basic-addon1" className="bg-warning text-dark">🔍</InputGroup.Text>
           </InputGroup>
         </Col>
@@ -153,7 +168,7 @@ const CoursesPage = () => {
             aria-label="Filter by Grade Level"
             onChange={(e) => setFilterGradeLevel(e.target.value)}
             className="mb-3"
-          >
+            >
              <option value="">All Grade Levels</option>
             <option value="Elementary School">Elementary School</option>
             <option value="Middle School">Middle School</option>
@@ -174,11 +189,11 @@ const CoursesPage = () => {
                       isActive={activeSection === course.id}
                       handleEnroll={handleEnroll}
                       enrolledCourses={enrolledCourses}
-                    />
+                      />
                   </Col>
                 ))
-              ) : (
-                <Col xs={12}>
+                ) : (
+                  <Col xs={12}>
                   <p className="text-muted">No results found</p>
                 </Col>
               )}
@@ -187,6 +202,7 @@ const CoursesPage = () => {
         ))}
       </Row>
     </Container>
+        </>
   );
 };
 
