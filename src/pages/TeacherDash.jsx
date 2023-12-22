@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/TeachDash.css";
 import {
   Container,
   Row,
@@ -14,6 +15,26 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const TeacherDashboard = () => {
+  const backendData = [
+    {
+      courseName: "React Programming",
+      students: [
+        { id: 1, name: "Student 1" },
+        { id: 2, name: "Student 2" },
+        { id: 3, name: "Student 3" },
+      ],
+    },
+    {
+      courseName: "JavaScript Fundamentals",
+      students: [
+        { id: 4, name: "Student 4" },
+        { id: 5, name: "Student 5" },
+        { id: 6, name: "Student 6" },
+      ],
+    },
+    // Add more courses as needed
+  ];
+
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [newClass, setNewClass] = useState({
@@ -95,50 +116,86 @@ const TeacherDashboard = () => {
 
   return (
     <>
-      <Container>
-        {/* Profile Button (Top Right Corner) */}
-        <Row className="justify-content-end mt-2">
-          <Button variant="outline-primary" onClick={handleOpenProfileModal}>
-            View Profile
-          </Button>
-        </Row>
-
+      {/* Profile Button (Top Right Corner) */}
+      <nav className="navbar bg-body-tertiary rounded sticky-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/tec">
+            AppName
+          </a>
+          <form class="d-flex" role="search">
+            <div className="d-flex">
+              <img
+                src="/Assets/erwin.jpg" // Replace with the actual path to the teacher's image
+                alt="Teacher"
+                className="img-fluid rounded-circle"
+                style={{ width: "40px", height: "40px", cursor: "pointer" }}
+                onClick={handleOpenProfileModal}
+              />
+            </div>
+          </form>
+        </div>
+      </nav>
+      <div className="container">
         {/* Teacher's Profile Modal */}
         <Modal show={openProfileModal} onHide={handleCloseProfileModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Teacher's Profile</Modal.Title>
-          </Modal.Header>
+          <Modal.Header closeButton></Modal.Header>
           <Modal.Body className="text-center">
             <img
-              src="teacher-profile-picture.jpg"
+              src="/Assets/erwin.jpg"
               alt="Teacher"
               className="img-fluid rounded-circle"
               style={{ width: "100px", height: "100px", margin: "auto" }}
             />
             <h5 className="font-weight-bold mt-2">John Doe</h5>
-            <p>Email ID: john.doe@example.com</p>
-            <p>Courses Taken:</p>
-            <ListGroup>
-              <ListGroup.Item>Course 1</ListGroup.Item>
-              <ListGroup.Item>Course 2</ListGroup.Item>
-              {/* Add more courses as needed */}
-            </ListGroup>
+            <p>john.doe@example.com</p>
+
             <div className="mt-2">
-              <Button variant="primary" className="mr-2">
-                Change Password
+              <Button variant="primary" className="mr-2 mx-2">
+                Reset Password
               </Button>
-              <Button variant="primary">Sign Out</Button>
+              <Button
+                variant="danger-outline"
+                className="btn btn-outline-danger"
+              >
+                Sign Out
+              </Button>
             </div>
           </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={handleCloseProfileModal}>Close</Button>
-          </Modal.Footer>
         </Modal>
-      </Container>
+      </div>
       <Container className="mt-3">
-        <Button variant="primary" className="mb-3" onClick={handleCreateClass}>
+        {/* <Button variant="primary" className="mb-3" onClick={handleCreateClass}>
           Create New Class
-        </Button>
+        </Button> */}
+
+        <h3>Course 1</h3>
+       
+
+        <ul class="list-group course ">
+          <li class="list-group-item my-1 text-start">Student 1</li>
+          <li class="list-group-item my-1">Student 1</li>
+          <li class="list-group-item my-1">Student 1</li>
+          <li class="list-group-item my-1">Student 1</li>
+          <li class="list-group-item my-1">Student 1</li>
+        </ul>
+        <h3>Course 1</h3>
+
+        <ul class="list-group course">
+          <li class="list-group-item my-1">Student 1</li>
+          <li class="list-group-item my-1">Student 1</li>
+          <li class="list-group-item my-1">Student 1</li>
+          <li class="list-group-item my-1">Student 1</li>
+          <li class="list-group-item my-1">Student 1</li>
+        </ul>
+        <h3>Course 1</h3>
+
+        <ul class="list-group course">
+          <li class="list-group-item my-1">Student 1</li>
+          <li class="list-group-item my-1">Student 1</li>
+          <li class="list-group-item my-1">Student 1</li>
+          <li class="list-group-item my-1">Student 1</li>
+          <li class="list-group-item my-1">Student 1</li>
+        </ul>
 
         {showCalendar && (
           <Card className="mb-3">
