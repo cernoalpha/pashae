@@ -18,10 +18,10 @@ import { blue } from "@mui/material/colors";
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const [notifications, setNotifications] = useState([
-    { title: "New assignment uploaded", date: "March 7, 2023" },
-    { title: "Upcoming class reminder", date: "March 8, 2023" },
-  ]);
+  // const [notifications, setNotifications] = useState([
+  //   { title: "New assignment uploaded", date: "March 7, 2023" },
+  //   { title: "Upcoming class reminder", date: "March 8, 2023" },
+  // ]);
   const [upcomingClasses, setupcomingClasses]= useState([{date: "No data yet", time: "", tutor: ""}])
 
   const [attendanceRecords, setattendanceRecords] = useState([{ date: "No record Yet", status: "-" }])
@@ -99,22 +99,36 @@ const Dashboard = () => {
     <Container fluid>
       
         <nav class="navbar navbar-light bg-light justify-content-between" style={{padding: "20px"}}>
-  <a class="navbar-brand" style={{color: "blue"}}>App Name</a>
-  <form class="d-flex" role="search">
-            <div className="d-flex">
-              <img
-                src="/Assets/erwin.jpg" // Replace with the actual path to the teacher's image
-                alt="Teacher"
-                className="img-fluid rounded-circle"
-                style={{ width: "40px", height: "40px", cursor: "pointer" }}
-                onClick={handleOpenProfileModal}
-              />
-            </div>
-          </form>
-</nav>
-<Modal show={openProfileModal} onHide={handleCloseProfileModal}>
+        <div className="container">
+          <a class="navbar-brand" style={{ fontSize:"20px"}}>App Name</a>
+         
+           <form className="d-flex ml-auto" style={{fontSize:"15px"}} >
+            <a className="nav-link" href="http://localhost:5173/" >Home<span class="sr-only">(current)</span></a>&nbsp;&nbsp;&nbsp;
+            <a className="nav-link" href="http://localhost:5173/cor">Course</a>&nbsp;&nbsp;&nbsp;
+            <a className="nav-link" href="http://localhost:5173/assignment">Assignment</a>&nbsp;&nbsp;&nbsp;
+           </form>
+         </div>
+    
+    
+          <div class="con">
+            <form class="d-flex" role="search">
+              <div className="d-flex">
+                <img
+                   src="/Assets/erwin.jpg" // Replace with the actual path to the teacher's image
+                  alt="Teacher"
+                  className="img-fluid rounded-circle"
+                   style={{ width: "40px", height: "40px", cursor: "pointer" }}
+                  onClick={handleOpenProfileModal}
+                />
+             </div>
+           </form>
+          </div>
+  
+        </nav>
+       <Modal show={openProfileModal} onHide={handleCloseProfileModal} >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body className="text-center">
+        
           <img
             src="/Assets/erwin.jpg"
             alt="Teacher"
@@ -132,8 +146,8 @@ const Dashboard = () => {
               Sign Out
             </Button>
           </div>
-        </Modal.Body>
-      </Modal>
+          </Modal.Body>
+       </Modal>
 
           {/* <Navbar bg="light" expand="lg">
             <Navbar.Brand>Welcome back, John!</Navbar.Brand>
@@ -153,12 +167,12 @@ const Dashboard = () => {
               </Nav>
             </Navbar.Collapse>
           </Navbar> */}
-       <a href="/cor"><button className="btn btn-primary">courses</button></a> 
+        
       <Row style={{paddingLeft: "20px",paddingRight:"20px"}}>
         <Col xs={12} md={6} lg={8}>
           <Card style={{ marginTop: "30px" }}>
             <Card.Body>
-              <h6 style={{color: blue}}>Upcoming Classes</h6>
+              <h4 style={{color: blue}}>Upcoming Classes</h4>
               {upcomingClasses.map((upcomingClass, index) => (
                 <p
                   key={index}
@@ -184,7 +198,7 @@ const Dashboard = () => {
         <Col xs={12} md={6} lg={4}>
           <Card style={{ marginTop: "30px" }}>
             <Card.Body>
-              <h6>Attendance Records</h6>
+              <h4>Attendance Records</h4>
               {attendanceRecords.map((attendanceRecord, index) => (
                 <p key={index}>
                   {attendanceRecord.date} - {attendanceRecord.status}
@@ -241,10 +255,6 @@ const Dashboard = () => {
           style={{ padding: "20px", display: "flex", justifyContent: "space-between" ,marginTop: "auto"}}
         >
           <p>© 2023 All rights reserved.</p>
-          <Button variant="outline-dark" onClick={handleLogout}>
-            Logout
-            <LogoutIcon />
-          </Button>
         </Col>
       </Row>
       
