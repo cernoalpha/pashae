@@ -18,11 +18,11 @@ import { blue } from "@mui/material/colors";
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  // const [notifications, setNotifications] = useState([
-  //   { title: "New assignment uploaded", date: "March 7, 2023" },
-  //   { title: "Upcoming class reminder", date: "March 8, 2023" },
-  // ]);
-  const [upcomingClasses, setupcomingClasses]= useState([{date: "No data yet", time: "", tutor: ""}])
+  const [notifications, setNotifications] = useState([
+    { title: "New assignment uploaded", date: "March 7, 2023" },
+    { title: "Upcoming class reminder", date: "March 8, 2023" },
+  ]);
+  const [upcomingClasses, setupcomingClasses] = useState([{ date: "No data yet", time: "", tutor: "" }])
 
   const [attendanceRecords, setattendanceRecords] = useState([{ date: "No record Yet", status: "-" }])
 
@@ -43,7 +43,7 @@ const Dashboard = () => {
 
   }, [])
 
-  const fetchStudentData = async () =>{
+  const fetchStudentData = async () => {
     try {
       const response = await fetch('http://localhost:3001/studentData', {
         method: 'POST',
@@ -149,7 +149,7 @@ const Dashboard = () => {
           </Modal.Body>
        </Modal>
 
-          {/* <Navbar bg="light" expand="lg">
+      {/* <Navbar bg="light" expand="lg">
             <Navbar.Brand>Welcome back, John!</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -223,46 +223,46 @@ const Dashboard = () => {
             </Card.Body>
           </Card>
         </Col> */}
-        {/* settings */} 
+        {/* settings */}
       </Row>
-      <Row style={{ marginTop: "30px", padding:"20px"} }><h4>Selected Courses</h4></Row>
-      <div class="card-deck row" style={{padding:"20px"}}>
-  <div class="card col-lg-3 mx-5 text-center">
-    <img class="card-img-top" src="..." alt="Card image cap"></img>
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-    </div>
-   
-  </div>
-  <div class="card col-lg-3 mx-5 text-center">
-    <img class="card-img-top" src="..." alt="Card image cap"></img>
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-    </div>
-    
-  </div>
-  <div class="card col-lg-3 mx-5 text-center">
-    <img class="card-img-top" src="..." alt="Card image cap"></img>
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-    
-  </div>
-</div></div>
+      <Row style={{ marginTop: "30px", padding: "20px" }}><h4>Selected Courses</h4></Row>
+      <div class="card-deck row" style={{ padding: "20px" }}>
+        <div class="card col-lg-3 mx-5 text-center">
+          <img class="card-img-top" src="..." alt="Card image cap"></img>
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+          </div>
 
-      <Row style={{minHeight: "75vh", display: "flex", flexDirection: "column" }}>
+        </div>
+        <div class="card col-lg-3 mx-5 text-center">
+          <img class="card-img-top" src="..." alt="Card image cap"></img>
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+          </div>
+
+        </div>
+        <div class="card col-lg-3 mx-5 text-center">
+          <img class="card-img-top" src="..." alt="Card image cap"></img>
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+
+          </div>
+        </div></div>
+
+      <Row style={{ minHeight: "75vh", display: "flex", flexDirection: "column" }}>
         <Col
           xs={12}
-          style={{ padding: "20px", display: "flex", justifyContent: "space-between" ,marginTop: "auto"}}
+          style={{ padding: "20px", display: "flex", justifyContent: "space-between", marginTop: "auto" }}
         >
           <p>© 2023 All rights reserved.</p>
         </Col>
       </Row>
-      
+
     </Container>
-    
+
   );
 
-    
+
 };
 
 

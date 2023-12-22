@@ -36,68 +36,6 @@ const CourseListing = ({ course, onMouseEnter, onMouseLeave, isActive, handleEnr
 );
 
 const CoursesPage = () => {
-  // Temporary data structures for courses and enrolled courses (replace with actual API calls)
-  const tempCourses = {
-    "Computer Science": [
-      {
-        id: 1,
-        name: "Introduction to React",
-        gradeLevel: "High School",
-        teacherName: "Mr. Smith",
-        description: "Learn the basics of React, a popular JavaScript library for building user interfaces.",
-      },
-      {
-        id: 12,
-        name: "Introduction to Vue",
-        gradeLevel: "High School",
-        teacherName: "Mr. JoeShmo",
-        description: "Learn the basics of Vue, a popular JavaScript framework for building user interfaces.",
-      },
-      {
-        id: 14,
-        name: "Introduction to Next",
-        gradeLevel: "High School",
-        teacherName: "Mr. JoeShmo",
-        description: "Learn the basics of Vue, a popular JavaScript framework for building user interfaces.",
-      },
-    ],
-    "Mathematics": [
-      {
-        id: 2,
-        name: "Algebra II",
-        gradeLevel: "High School",
-        teacherName: "Mrs. Jones",
-        description: "Study advanced algebraic concepts such as polynomials, conic sections, and logarithms.",
-      },
-    ],
-    "English": [
-      {
-        id: 3,
-        name: "English Literature",
-        gradeLevel: "High School",
-        teacherName: "Mr. Brown",
-        description: "Explore classic and contemporary literature, developing critical thinking and analytical skills.",
-      },
-    ],
-    "Science": [
-      {
-        id: 4,
-        name: "Biology",
-        gradeLevel: "High School",
-        teacherName: "Ms. Green",
-        description: "Investigate the fundamental principles of life, including cells, genetics, and evolution.",
-      },
-    ],
-    "Social Studies": [
-      {
-        id: 5,
-        name: "World History",
-        gradeLevel: "High School",
-        teacherName: "Mr. White",
-        description: "Journey through major historical events and civilizations, examining their impact on the present.",
-      },
-    ],
-  };
 
   const tempEnrolledCourses = [1, 3];
 
@@ -108,13 +46,11 @@ const CoursesPage = () => {
   const [activeSection, setActiveSection] = useState("");
   const [enrolledCourses, setEnrolledCourses] = useState(tempEnrolledCourses);
 
-  // Group courses by subject
   const groupedCourses = Object.keys(courses).reduce((acc, subject) => {
     acc[subject] = courses[subject].map((course) => course);
     return acc;
   }, {});
 
-  // Filter courses
   const filteredCourses = Object.keys(groupedCourses).reduce((acc, subject) => {
     acc[subject] = groupedCourses[subject]
     .filter((course) => {
@@ -124,22 +60,58 @@ const CoursesPage = () => {
     return acc;
   }, {});
 
-  // Handle course enrollment
-  const handleEnroll = (course) => {
-    // Check if the course is already enrolled
-    if (enrolledCourses.includes(course.id)) {
-      alert(`You are already enrolled in ${course.name}.`);
-      return;
-    }
-    alert(`Enrolling in ${course.name}...`);
+  const handleEnroll = async (course) => {
 
-    // Add the course ID to the enrolledCourses state
-    setEnrolledCourses([...enrolledCourses, course.id]);
+    alert(`Enrolling in ${course.name}...`);
+    UID = "fGqBLJ05CtRQpfAbN8N2k06AOEm2"
+
+    try {
+      const response = await fetch('http://localhost:3001/enrollCourse', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({CID: course.id}),
+      });
+
+      if (!response.ok) {
+          throw new Error('Failed to fetch courses');
+      }
+
+      const data = await response.json();
+      setCourses(data.courses);
+  } catch (error) {
+      console.error('Error fetching courses:', error);
+  }
+
+
+    
   };
 
   useEffect(() => {
-    setCourses(tempCourses);
+    getCouses()
   }, []);
+
+  const getCouses= async()=>{
+    try {
+      const response = await fetch('http://localhost:3001/getcourses', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      });
+
+      if (!response.ok) {
+          throw new Error('Failed to fetch courses');
+      }
+
+      const data = await response.json();
+      setCourses(data.courses);
+  } catch (error) {
+      console.error('Error fetching courses:', error);
+  }
+
+  }
 
   return (
     <Container>
