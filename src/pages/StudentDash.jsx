@@ -97,22 +97,29 @@ const Dashboard = () => {
     <Container fluid>
       <Row>
         <Col xs={12}>
-         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-           <a class="navbar-brand" href="#">App Name</a>
-           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+         <nav className="navbar navbar-expand-lg navbar-light bg-light">
+           <a className="navbar-brand" href="#">App Name</a>
+           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
             </button>
-             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav "> 
-                  <li class="nav-item dropdown ml-auto">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <img src="image refeence" style={{marginLeft: "auto"}}></img>
+             <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav "> 
+                  <li className="nav-item dropdown ml-auto">
+                    <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                       <Image
+                            src="https://via.placeholder.com/60"
+                             roundedCircle
+                              style={{ width: 60, height: 60, marginRight: "20px" }}
+                        />
+                        <h6>John Doe</h6>
+                      </div>
                     </a>
-                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                     <a class="dropdown-item" href="#">Action</a>
-                     <a class="dropdown-item" href="#">Another action</a>
-                     <div class="dropdown-divider"></div>
-                     <a class="dropdown-item" href="#">Something else here</a>
+                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                     <a className="dropdown-item" href="#">Action</a>
+                     <a className="dropdown-item" href="#">Another action</a>
+                     <div className="dropdown-divider"></div>
+                     <a className="dropdown-item" href="#">Something else here</a>
                     </div>
                  </li>
                 </ul>
@@ -198,14 +205,7 @@ const Dashboard = () => {
         <Col xs={12} md={6} lg={3}>
           <Card style={{ marginTop: "30px" }}>
             <Card.Body>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <Image
-                  src="https://via.placeholder.com/60"
-                  roundedCircle
-                  style={{ width: 60, height: 60, marginRight: "20px" }}
-                />
-                <h6>John Doe</h6>
-              </div>
+              
             </Card.Body>
           </Card>
         </Col>
