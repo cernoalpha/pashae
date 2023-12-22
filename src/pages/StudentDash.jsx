@@ -10,6 +10,8 @@ import {
 } from "react-bootstrap";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import { blue } from "@mui/material/colors";
 
@@ -96,6 +98,19 @@ const Dashboard = () => {
   };
 
   return (
+    <>
+    <Navbar bg="dark" variant="dark" expand="lg">
+  <Navbar.Brand as={Link} to="/"></Navbar.Brand>
+  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+  <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className="justify-content-start">
+      <Nav.Link as={Link} to="/">Home</Nav.Link>
+      <Nav.Link as={Link} to="/cc">My courses</Nav.Link>
+      <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
+
     <Container fluid>
       
         <nav className="navbar navbar-light bg-success rounded-pill justify-content-between"  >
@@ -115,11 +130,11 @@ const Dashboard = () => {
               <div className="d-flex">
                 <img
                    src="/Assets/erwin.jpg" 
-                  alt="Teacher"
-                  className="img-fluid rounded-circle"
+                   alt="Teacher"
+                   className="img-fluid rounded-circle"
                    style={{ width: "40px", height: "40px", cursor: "pointer",marginRight:"30px" }}
-                  onClick={handleOpenProfileModal}
-                />
+                   onClick={handleOpenProfileModal}
+                   />
              </div>
            </form>
           </div>
@@ -134,7 +149,7 @@ const Dashboard = () => {
             alt="Teacher"
             className="img-fluid rounded-circle"
             style={{ width: "100px", height: "100px", margin: "auto" }}
-          />
+            />
           <h5 className="font-weight-bold mt-2">John Doe</h5>
           <p>john.doe@example.com</p>
 
@@ -153,20 +168,20 @@ const Dashboard = () => {
             <Navbar.Brand>Welcome back, John!</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="ms-auto">
-                <Nav.Link onClick={() => navigate("/notifications")}>
-                  <NotificationsIcon />
-                </Nav.Link>
-                <NavDropdown title={<MoreVertIcon />} id="basic-nav-dropdown">
-                  {notifications.map((notification, index) => (
-                    <NavDropdown.Item key={index}>
-                      {notification.title} - {notification.date}
-                    </NavDropdown.Item>
-                  ))}
-                </NavDropdown>
+            <Nav className="ms-auto">
+            <Nav.Link onClick={() => navigate("/notifications")}>
+            <NotificationsIcon />
+            </Nav.Link>
+            <NavDropdown title={<MoreVertIcon />} id="basic-nav-dropdown">
+            {notifications.map((notification, index) => (
+              <NavDropdown.Item key={index}>
+              {notification.title} - {notification.date}
+              </NavDropdown.Item>
+              ))}
+              </NavDropdown>
               </Nav>
-            </Navbar.Collapse>
-          </Navbar> */}
+              </Navbar.Collapse>
+            </Navbar> */}
         
       <Row style={{paddingLeft: "20px",paddingRight:"20px"}}>
         <Col xs={12} md={6} lg={8}>
@@ -175,9 +190,9 @@ const Dashboard = () => {
               <h4 style={{color: blue}}>Upcoming Classes</h4>
               {upcomingClasses.map((upcomingClass, index) => (
                 <p
-                  key={index}
-                  onClick={() => navigate("/class")}
-                  style={{ cursor: "pointer" }}
+                key={index}
+                onClick={() => navigate("/class")}
+                style={{ cursor: "pointer" }}
                 >
                   {upcomingClass.date} - {upcomingClass.tutor}
                 </p>
@@ -187,12 +202,12 @@ const Dashboard = () => {
         </Col>
         {/* <Col xs={12} md={6} lg={3}>
           <Card style={{ marginTop: "20px" }}>
-            <Card.Body>
-              <h6>Class Schedule</h6>
-              <h3>hello</h3>
-              <Button variant="contained">Contained</Button>
-              <CalendarTodayIcon style={{ fontSize: "3rem", color: "#808080" }} />
-            </Card.Body>
+          <Card.Body>
+          <h6>Class Schedule</h6>
+          <h3>hello</h3>
+          <Button variant="contained">Contained</Button>
+          <CalendarTodayIcon style={{ fontSize: "3rem", color: "#808080" }} />
+          </Card.Body>
           </Card>
         </Col> */}
         <Col xs={12} md={6} lg={4}>
@@ -209,20 +224,20 @@ const Dashboard = () => {
         </Col>
         {/* <Col xs={12} md={6} lg={3}>
           <Card style={{ marginTop: "20px" }}>
-            <Card.Body>
-              <h6>Documents</h6>
-              {documents.map((document, index) => (
-                <p
-                  key={index}
-                  onClick={() => navigate("/document")}
-                  style={{ cursor: "pointer" }}
-                >
-                  {document.title} - {document.date}
-                </p>
-              ))}
+          <Card.Body>
+          <h6>Documents</h6>
+          {documents.map((document, index) => (
+            <p
+            key={index}
+            onClick={() => navigate("/document")}
+            style={{ cursor: "pointer" }}
+            >
+            {document.title} - {document.date}
+            </p>
+            ))}
             </Card.Body>
-          </Card>
-        </Col> */}
+            </Card>
+          </Col> */}
         {/* settings */}
       </Row>
       <Row style={{ marginTop: "30px", padding: "20px" }}><h4>Selected Courses</h4></Row>
@@ -253,12 +268,13 @@ const Dashboard = () => {
         <Col
           xs={12}
           style={{ padding: "20px", display: "flex", justifyContent: "space-between", marginTop: "auto" }}
-        >
+          >
           <p>© 2023 All rights reserved.</p>
         </Col>
       </Row>
 
     </Container>
+          </>
 
   );
 

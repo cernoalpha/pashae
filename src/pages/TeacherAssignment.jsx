@@ -19,6 +19,8 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
+import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import PersonIcon from "@mui/icons-material/Person";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
@@ -126,82 +128,96 @@ const AssignmentSettings = () => {
   };
 
   return (
-    <Grid container spacing={2} sx={styles.container}>
-      <Grid item xs={12}>
-        <Paper elevation={3} sx={styles.form}>
-          <Typography sx={styles.title}>Create Assignment</Typography>
-          <TextField
-            label="Title"
-            variant="outlined"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <TextField
-            label="Description"
-            variant="outlined"
-            multiline
-            rows={4}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <TextField
-            label="Due Date"
-            variant="outlined"
-            type="date"
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
-          />
-          <Button
-            variant="outlined"
-            startIcon={<AddIcon />}
-            onClick={(e) => setAnchorEl(e.currentTarget)}
-          >
-            Add Student
-          </Button>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={() => setAnchorEl(null)}
-          >
-            {students.map((student) => (
-              <MenuItem key={student} onClick={handleAddStudent}>
-                {student}
-              </MenuItem>
+    <>
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar.Brand as={Link} to="/"></Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="justify-content-start">
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/cc">My courses</Nav.Link>
+            <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+
+      <Grid container spacing={2} sx={styles.container}>
+        <Grid item xs={12}>
+          <Paper elevation={3} sx={styles.form}>
+            <Typography sx={styles.title}>Create Assignment</Typography>
+            <TextField
+              label="Title"
+              variant="outlined"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <TextField
+              label="Description"
+              variant="outlined"
+              multiline
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <TextField
+              label="Due Date"
+              variant="outlined"
+              type="date"
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
+            />
+            <Button
+              variant="outlined"
+              startIcon={<AddIcon />}
+              onClick={(e) => setAnchorEl(e.currentTarget)}
+            >
+              Add Student
+            </Button>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={() => setAnchorEl(null)}
+            >
+              {students.map((student) => (
+                <MenuItem key={student} onClick={handleAddStudent}>
+                  {student}
+                </MenuItem>
+              ))}
+            </Menu>
+          </Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper elevation={3} sx={styles.studentsList}>
+            <Typography sx={styles.title}>Students</Typography>
+            {selectedStudents.map((student) => (
+              <ListItem key={student} sx={styles.studentItem}>
+                <ListItemButton>
+                  <Avatar sx={styles.avatar}>
+                    <PersonIcon />
+                  </Avatar>
+                  <ListItemText primary={student} sx={styles.studentName} />
+                </ListItemButton>
+                <div sx={styles.studentSubmittedFile}>
+                  <FileUploadIcon />
+                  <Typography>Submitted File</Typography>
+                </div>
+                <Checkbox />
+              </ListItem>
             ))}
-          </Menu>
-        </Paper>
+            <Divider />
+            <Button
+              variant="contained"
+              endIcon={<SendIcon />}
+              sx={styles.submitButton}
+              onClick={handleSendAssignment}
+            >
+              Send Assignment
+            </Button>
+          </Paper>
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <Paper elevation={3} sx={styles.studentsList}>
-          <Typography sx={styles.title}>Students</Typography>
-          {selectedStudents.map((student) => (
-            <ListItem key={student} sx={styles.studentItem}>
-              <ListItemButton>
-                <Avatar sx={styles.avatar}>
-                  <PersonIcon />
-                </Avatar>
-                <ListItemText primary={student} sx={styles.studentName} />
-              </ListItemButton>
-              <div sx={styles.studentSubmittedFile}>
-                <FileUploadIcon />
-                <Typography>Submitted File</Typography>
-              </div>
-              <Checkbox />
-            </ListItem>
-          ))}
-          <Divider />
-          <Button
-            variant="contained"
-            endIcon={<SendIcon />}
-            sx={styles.submitButton}
-            onClick={handleSendAssignment}
-          >
-            Send Assignment
-          </Button>
-        </Paper>
-      </Grid>
-    </Grid>
+    </>
   );
 };
 

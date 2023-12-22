@@ -8,6 +8,8 @@ import {
   Col,
 } from "react-bootstrap";
 import { FileEarmarkArrowUp } from "react-bootstrap-icons";
+import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const AssignmentPage = () => {
   const [assignments, setAssignments] = useState(null);
@@ -66,6 +68,20 @@ const AssignmentPage = () => {
   };
 
   return (
+    <>
+    <Navbar bg="dark" variant="dark" expand="lg">
+  <Navbar.Brand as={Link} to="/"></Navbar.Brand>
+  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+  <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className="justify-content-start">
+      <Nav.Link as={Link} to="/">Home</Nav.Link>
+      <Nav.Link as={Link} to="/cc">My courses</Nav.Link>
+      <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
+
+    
     <Container fluid>
       <Row>
         <Col xs={12}>
@@ -79,7 +95,7 @@ const AssignmentPage = () => {
                 as="select"
                 value={currentSubject}
                 onChange={handleSubjectChange}
-              >
+                >
                 <option value="All Subjects">All Subjects</option>
                 {subjects.map((subject) => (
                   <option key={subject} value={subject}>
@@ -111,12 +127,12 @@ const AssignmentPage = () => {
                         type="checkbox"
                         checked={assignment.completed}
                         onChange={() => handleComplete(assignment.id)}
-                      />
+                        />
                       <Button
                         variant="primary"
                         size="sm"
                         onClick={handleUpload}
-                      >
+                        >
                         <FileEarmarkArrowUp /> Upload
                       </Button>
                     </Col>
@@ -128,6 +144,7 @@ const AssignmentPage = () => {
         </Row>
       ))}
     </Container>
+      </>
   );
 };
 
