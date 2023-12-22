@@ -10,7 +10,7 @@ function App() {
              <Components.SignUpContainer signinIn={signIn}>
                  <Components.Form>
                  <Components.Title>Teacher</Components.Title>
-                      <Components.Input type='email' placeholder='Teacher Id' />
+                      <Components.Input type='email' placeholder='email' />
                       <Components.Input type='password' placeholder='Password' />
                       <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
                       <Components.Button>Sigin In</Components.Button>
@@ -20,7 +20,7 @@ function App() {
              <Components.SignInContainer signinIn={signIn}>
                   <Components.Form>
                       <Components.Title>Student</Components.Title>
-                      <Components.Input type='email' placeholder='USN' />
+                      <Components.Input type='email' placeholder='email' />
                       <Components.Input type='password' placeholder='Password' />
                       <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
                       <Components.Button>Sigin In</Components.Button>
