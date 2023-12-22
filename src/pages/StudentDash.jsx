@@ -34,11 +34,6 @@ const Dashboard = () => {
 
   const [attendanceRecords, setattendanceRecords] = useState([{ date: "No record Yet", status: "-" }])
 
-  // const attendanceRecords = [
-  //   { date: "February 22, 2023", status: "Present" },
-  //   { date: "February 24, 2023", status: "Absent" },
-  //   { date: "February 28, 2023", status: "Present" },
-  // ];
 
   const documents = [
     { title: "Math Notes", date: "March 2, 2023" },

@@ -1,23 +1,39 @@
 import React, { useState, useEffect } from "react";
 import {
   Container,
-  Grid,
-  Paper,
-  Typography,
-  TextField,
-  InputAdornment,
-  MenuItem,
+  Row,
+  Col,
+  Card,
+  Form,
+  FormControl,
+  InputGroup,
   Button,
-  Grow,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
+} from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const CourseListing = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(2),
-  margin: theme.spacing(2),
-  display: "flex",
-  alignItems: "center",
-}));
+const CourseListing = ({ course, onMouseEnter, onMouseLeave, isActive, handleEnroll, enrolledCourses }) => (
+  <Card
+    style={{ margin: "10px", padding: "10px" }}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+  >
+    <Card.Title>{course.name}</Card.Title>
+    <Card.Subtitle className="mb-2 text-muted">{course.gradeLevel}</Card.Subtitle>
+    <Card.Subtitle className="mb-2 text-muted">{course.teacherName}</Card.Subtitle>
+    <Card.Text style={{ marginTop: "8px", fontStyle: isActive ? "inherit" : "italic", transition: "all 0.3s ease-in-out" }}>
+      {course.description}
+    </Card.Text>
+    {enrolledCourses.includes(course.id) ? (
+      <Button variant="contained" disabled>
+        Enrolled
+      </Button>
+    ) : (
+      <Button variant="contained" color="primary" onClick={() => handleEnroll(course)}>
+        Enroll
+      </Button>
+    )}
+  </Card>
+);
 
 const CoursesPage = () => {
   // Temporary data structures for courses and enrolled courses (replace with actual API calls)
@@ -108,7 +124,7 @@ const CoursesPage = () => {
     return acc;
   }, {});
 
-  // Handle course enrollment (placeholder)
+  // Handle course enrollment
   const handleEnroll = (course) => {
     // Check if the course is already enrolled
     if (enrolledCourses.includes(course.id)) {
@@ -121,86 +137,62 @@ const CoursesPage = () => {
     setEnrolledCourses([...enrolledCourses, course.id]);
   };
 
-  // Fetch course data from the server (replace with actual API call)
   useEffect(() => {
     setCourses(tempCourses);
   }, []);
 
   return (
     <Container>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Typography variant="h4">Courses</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Search courses or ID"
-            variant="outlined"
-            InputProps={{
-              startAdornment: <InputAdornment position="start">🔍</InputAdornment>,
-            }}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            select
-            label="Filter by Grade Level"
-            variant="outlined"
-            value={filterGradeLevel}
+      <Row>
+        <Col xs={12}>
+          <h4>Courses</h4>
+        </Col>
+        <Col xs={12}>
+          <InputGroup className="mb-3">
+            <FormControl
+              placeholder="Search courses or ID"
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <InputGroup.Text id="basic-addon1">🔍</InputGroup.Text>
+          </InputGroup>
+        </Col>
+        <Col xs={12}>
+          <Form.Select
+            aria-label="Filter by Grade Level"
             onChange={(e) => setFilterGradeLevel(e.target.value)}
           >
-            <MenuItem value="">All Grade Levels</MenuItem>
-            <MenuItem value="Elementary School">Elementary School</MenuItem>
-            <MenuItem value="Middle School">Middle School</MenuItem>
-            <MenuItem value="High School">High School</MenuItem>
-          </TextField>
-        </Grid>
+            <option value="">All Grade Levels</option>
+            <option value="Elementary School">Elementary School</option>
+            <option value="Middle School">Middle School</option>
+            <option value="High School">High School</option>
+          </Form.Select>
+        </Col>
         {Object.keys(filteredCourses).map((subject) => (
-          <Grid item xs={12} key={subject}>
-            <Typography variant="h5">{subject}</Typography>
-            <Grid container spacing={2}>
+          <Col xs={12} key={subject}>
+            <h5>{subject}</h5>
+            <Row xs={4}>
               {filteredCourses[subject].length > 0 ? (
                 filteredCourses[subject].map((course) => (
-                  <Grid item xs={4} key={course.id}>
-                    <CourseListing onMouseEnter={() => setActiveSection(course.id)} onMouseLeave={() => setActiveSection("")}>
-                      <Typography variant="h6">{course.name}</Typography>
-                      <Typography variant="subtitle1">{course.gradeLevel}</Typography>
-                      <Typography variant="subtitle1">{course.teacherName}</Typography>
-                      <Grow in={activeSection === course.id} timeout={400}>
-                        <Typography variant="body2"  sx={{
-                            fontStyle: activeSection === course.id ? 'inherit' : 'italic',
-                            transition: 'all 0.3s ease-in-out',
-                            marginTop: '8px',
-                          }}>
-                          {course.description}
-                        </Typography>
-                      </Grow>
-                      {enrolledCourses.includes(course.id) ? (
-                        <Button variant="contained" disabled>
-                          Enrolled
-                        </Button>
-                      ) : (
-                        <Button variant="contained" color="primary" onClick={() => handleEnroll(course)}>
-                          Enroll
-                        </Button>
-                      )}
-                    </CourseListing>
-                  </Grid>
+                  <Col key={course.id}>
+                    <CourseListing
+                      course={course}
+                      onMouseEnter={() => setActiveSection(course.id)}
+                      onMouseLeave={() => setActiveSection("")}
+                      isActive={activeSection === course.id}
+                      handleEnroll={handleEnroll}
+                      enrolledCourses={enrolledCourses}
+                    />
+                  </Col>
                 ))
               ) : (
-                <Grid item xs={12}>
-          <Typography variant="body1">
-                    No results found
-                  </Typography>
-                </Grid>
+                <Col xs={12}>
+                  <p>No results found</p>
+                </Col>
               )}
-            </Grid>
-          </Grid>
+            </Row>
+          </Col>
         ))}
-      </Grid>
+      </Row>
     </Container>
   );
 };
