@@ -29,11 +29,9 @@ img{
     margin: 0 auto;
 }
 
-h1 {
-    font-family: 'Permanent Marker', cursive;
-font-family: 'Reem Kufi', sans-serif;
-    font-size: 3em;
-    margin-bottom: 20px;
+#appname{
+    font-family: 'Rubik Doodle Triangles';
+    font-size:100px;
 }
 
 .title {
