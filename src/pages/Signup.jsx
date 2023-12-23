@@ -44,11 +44,6 @@ function App() {
   };
 
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
 
   const [signIn, toggle] = React.useState(true);
   return (
@@ -75,20 +70,17 @@ function App() {
                 type="email"
                 placeholder="email"
                 onChange={handleTeacherChange}
-                value={teacherData.email}
               />
               <Components.Input
                 required
                 type="text"
                 placeholder="Name"
                 onChange={handleTeacherChange}
-                value={teacherData.name}
               />
               <Components.Input
                 type="password"
                 placeholder="Password"
                 onChange={handleTeacherChange}
-                value={teacherData.password}
               />
 
               <br />
@@ -108,36 +100,35 @@ function App() {
               <Components.Input
                 type="email"
                 placeholder="email"
-                value={studentData.email}
                 onChange={handleStudentChange}
               />
               <Components.Input
                 type="email"
                 placeholder="Parent's Email"
-                value={studentData.parentEmail}
                 onChange={handleStudentChange}
               />
               <Components.Input
                 type="tel"
                 pattern="[0-9]{10}"
                 placeholder="Phone"
-                value={studentData.phone}
                 onChange={handleStudentChange}
                 maxLength="10"
               />
               <Components.Input
                 type="password"
                 placeholder="Password"
-                value={studentData.password}
                 onChange={handleStudentChange}
               />
               <br />
               <a href="/">
                 <Components.Button
                   style={{ cursor: "pointer" }}
-                  onClick={() => handleStudentSignup(studentData)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleStudentSignup(studentData);
+                  }}
                 >
-                  Sigin Up
+                  Sign Up
                 </Components.Button>
               </a>
             </Components.Form>
