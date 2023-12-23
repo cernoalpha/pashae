@@ -13,6 +13,7 @@ import Login from "./pages/Login.jsx"
 import Signup from "./pages/Signup.jsx"
 import Home from "./pages/Home.jsx"
 import StudentDash from "./pages/StudentDash"
+import AI from "./pages/Ai.jsx"
 
 
 import {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: "/createass",
     element: <AssignmentSettings />,
+  },
+  {
+    path: "/AI",
+    element: <AI />,
   },
 
 ]);
