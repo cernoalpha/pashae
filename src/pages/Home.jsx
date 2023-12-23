@@ -22,10 +22,12 @@ export default function Home() {
       <div className="hero-container">
         <div className="hero-content">
           {/* <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy8ivjh3jEgWs6uv7DMzADcxPcFaWP00H1hQ&usqp=CAU' alt="TutorHub Logo" className="app-logo" /> */}
-          <div className="title">
+         
 
-            <h2>Welcome to</h2> <h1 id='appname'>Padh-AI</h1>
-          </div>
+            <h2>Welcome to</h2>
+             <br /> 
+            <h1 id='appname'>Padh-AI</h1>
+          
 
           <p>Empowering Teachers. Inspiring Students.</p>
           <div className="cta-buttons">
