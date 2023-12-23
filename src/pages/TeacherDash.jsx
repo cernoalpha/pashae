@@ -65,16 +65,16 @@ const TeacherDashboard = () => {
 
   const handleSaveClass = () => {
 
-    if (
-      !selectedDate ||
-      !newClass.time ||
-      !newClass.subject ||
-      !newClass.description ||
-      !newClass.meetLink
-    ) {
-      alert("Please fill in all required fields.");
-      return;
-    }
+    // if (
+    //   !selectedDate ||
+    //   !newClass.time ||
+    //   !newClass.subject ||
+    //   !newClass.description ||
+    //   !newClass.meetLink
+    // ) {
+    //   alert("Please fill in all required fields.");
+    //   return;
+    // }
 
     const createdClass = {
       date: selectedDate.toDateString(),
