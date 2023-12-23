@@ -174,7 +174,7 @@ const Dashboard = () => {
                     onMouseLeave={(e) => e.target.style.backgroundColor = "#ffffff"}
                   >
                     <p style={{ color: "#333", margin: "0", fontWeight: "bold" }}>
-                      {upcomingClass.date} - {upcomingClass.tutor}
+                      {upcomingClass.date+ " "}{ upcomingClass.time} - {upcomingClass.title}-{upcomingClass.tutor}
                     </p>
                   </div>
                 ))}
