@@ -17,14 +17,16 @@ function App() {
     phone: "",
     password: "",
   });
-  const handleTeacherSignup = (data) => {
+
+  const handleTeacherSignup = () => {
     // Perform actions with teacherData, e.g., send it to a server
-    console.log("Teacher Signup:", data);
+    console.log("Teacher Signup:", teacherData);
   };
 
-  const handleStudentSignup = (data) => {
+  const handleStudentSignup = (e) => {
+    e.preventDefault();
     // Perform actions with studentData, e.g., send it to a server
-    console.log("Student Signup:", data);
+    console.log("Student Signup:", studentData);
   };
 
   const handleTeacherChange = (e) => {
@@ -43,9 +45,8 @@ function App() {
     }));
   };
 
-  const [password, setPassword] = useState("");
-
   const [signIn, toggle] = React.useState(true);
+
   return (
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
@@ -68,26 +69,27 @@ function App() {
               <Components.Input
                 required
                 type="email"
+                name="email"
                 placeholder="email"
                 onChange={handleTeacherChange}
               />
               <Components.Input
                 required
                 type="text"
+                name="name"  // Change here
                 placeholder="Name"
                 onChange={handleTeacherChange}
               />
               <Components.Input
                 type="password"
+                name="password"
                 placeholder="Password"
                 onChange={handleTeacherChange}
               />
-
               <br />
-
               <Components.Button
                 style={{ cursor: "pointer" }}
-                onClick={() => handleTeacherSignup(teacherData)}
+                onClick={handleTeacherSignup}  // Change here
               >
                 Sign Up
               </Components.Button>
@@ -99,16 +101,19 @@ function App() {
               <Components.Title>Student</Components.Title>
               <Components.Input
                 type="email"
+                name="email"
                 placeholder="email"
                 onChange={handleStudentChange}
               />
               <Components.Input
                 type="email"
+                name="parentEmail"  // Change here
                 placeholder="Parent's Email"
                 onChange={handleStudentChange}
               />
               <Components.Input
                 type="tel"
+                name="phone"  // Change here
                 pattern="[0-9]{10}"
                 placeholder="Phone"
                 onChange={handleStudentChange}
@@ -116,6 +121,7 @@ function App() {
               />
               <Components.Input
                 type="password"
+                name="password"
                 placeholder="Password"
                 onChange={handleStudentChange}
               />
@@ -125,7 +131,7 @@ function App() {
                   style={{ cursor: "pointer" }}
                   onClick={(e) => {
                     e.preventDefault();
-                    handleStudentSignup(studentData);
+                    handleStudentSignup(e);  // Change here
                   }}
                 >
                   Sign Up
@@ -164,6 +170,7 @@ function App() {
             </Components.Overlay>
           </Components.OverlayContainer>
         </Components.Container>
+        
       </center>
     </>
   );
